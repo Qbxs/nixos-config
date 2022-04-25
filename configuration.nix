@@ -88,19 +88,23 @@
   environment.systemPackages = with pkgs; [
     # pkgs.gnome3.gnome-tweaks
     vim
-    emacs
     (import ./emacs.nix { inherit pkgs; })
     wget
+    gnumake
     git
+    stack
     firefox
     steam
     signal-desktop
+    discord
+    vscode
+    vscode-extensions.arcticicestudio.nord-visual-studio-code
     nordic
   ];
 
   # Enable Postgres
   services.postgresql.enable = true;
-  services.postgresql.package = pkgs.postgresql_11;
+  services.postgresql.package = pkgs.postgresql_14;
 
   # Set ZSH shell
   programs.zsh.enable = true;

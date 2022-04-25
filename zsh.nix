@@ -27,5 +27,8 @@
       e = ''emacsclient -c'';
       nix-shell = ''nix-shell --run zsh'';
     };
+    shellInit = ''
+        export PATH=/home/pascal/.local/bin:$PATH
+      '';
   };
 }
