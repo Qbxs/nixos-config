@@ -3,7 +3,11 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+  real-name = "Pascal Engel";
+  email = "ip4ssi@gmail.com";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -11,6 +15,7 @@
       # ./emacs.nix
       # ./postgres.nix
       ./zsh.nix
+      (import "${home-manager}/nixos")
     ];
 
   nix = {
@@ -18,7 +23,47 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-   };
+  };
+
+  # the sad part
+  nixpkgs.config.allowUnfree = true;
+
+  home-manager.users.pascal = {
+    /* Here goes your home-manager config, eg home.packages = [ pkgs.foo ]; */
+    programs = {
+      git = {
+        enable = true;
+        userName  = real-name;
+        userEmail = email;
+        extraConfig = {
+          color = {
+            ui = "auto";
+          };
+          user = {
+            signingkey = "3FFB5E924B624E438AA13488FDE0094719249572";
+          };
+          gpg = {
+            program = "/run/current-system/sw/bin/gpg2";
+          };
+          commit = {
+            gpgsign = true;
+          };
+          tag = {
+            ForceSignAnnotated = true;
+          };
+        };
+      };
+ #     vscode = {
+ #       enable = true;
+ #       extensions = with pkgs.vscode-extensions; [
+ #         yzhang.markdown-all-in-one
+ #         arcticicestudio.nord-visual-studio-code
+ #         haskell.haskell
+ #         bbenoist.nix
+ #       ];
+ #     };
+    };
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -91,14 +136,23 @@
     (import ./emacs.nix { inherit pkgs; })
     wget
     gnumake
+    gnupg
+    gcc
     git
+    ghc
+    haskellPackages.haskell-language-server
+    haskellPackages.hlint
+    haskellPackages.hls-hlint-plugin 
+    haskellPackages.brittany
+    haskellPackages.hls-brittany-plugin
     stack
+    pandoc
     firefox
     steam
     signal-desktop
+    slack
     discord
     vscode
-    vscode-extensions.arcticicestudio.nord-visual-studio-code
     nordic
   ];
 
@@ -111,8 +165,6 @@
   users.defaultUserShell = pkgs.zsh;
 
   # NVIDIA drivers
-  nixpkgs.config.allowUnfree = true;
-  
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
   
@@ -131,7 +183,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
