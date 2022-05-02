@@ -36,21 +36,11 @@ in
         userName  = real-name;
         userEmail = email;
         extraConfig = {
-          color = {
-            ui = "auto";
-          };
-          user = {
-            signingkey = "3FFB5E924B624E438AA13488FDE0094719249572";
-          };
-          gpg = {
-            program = "/run/current-system/sw/bin/gpg";
-          };
-          commit = {
-            gpgsign = true;
-          };
-          tag = {
-            ForceSignAnnotated = true;
-          };
+          color.ui = "auto";
+          user.signingkey = "3FFB5E924B624E438AA13488FDE0094719249572";
+          gpg.program = "/run/current-system/sw/bin/gpg";
+          commit.gpgsign = true;
+          tag.ForceSignAnnotated = true;
         };
       };
  #     vscode = {
