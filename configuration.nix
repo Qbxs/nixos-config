@@ -43,7 +43,7 @@ in
             signingkey = "3FFB5E924B624E438AA13488FDE0094719249572";
           };
           gpg = {
-            program = "/run/current-system/sw/bin/gpg2";
+            program = "/run/current-system/sw/bin/gpg";
           };
           commit = {
             gpgsign = true;
@@ -137,6 +137,7 @@ in
     wget
     gnumake
     gnupg
+    pinentry
     gcc
     git
     ghc
@@ -174,11 +175,12 @@ in
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "curses";
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
