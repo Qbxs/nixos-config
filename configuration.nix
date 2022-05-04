@@ -25,11 +25,10 @@ in
     '';
   };
 
-  # the sad part
-  nixpkgs.config.allowUnfree = true;
-
   home-manager.users.pascal = {
     /* Here goes your home-manager config, eg home.packages = [ pkgs.foo ]; */
+    nixpkgs.config.allowUnfree = true;
+
     programs = {
       git = {
         enable = true;
@@ -43,15 +42,15 @@ in
           tag.ForceSignAnnotated = true;
         };
       };
- #     vscode = {
- #       enable = true;
- #       extensions = with pkgs.vscode-extensions; [
- #         yzhang.markdown-all-in-one
- #         arcticicestudio.nord-visual-studio-code
- #         haskell.haskell
- #         bbenoist.nix
- #       ];
- #     };
+     vscode = {
+       enable = true;
+       extensions = with pkgs.vscode-extensions; [
+         yzhang.markdown-all-in-one
+         arcticicestudio.nord-visual-studio-code
+         haskell.haskell
+         bbenoist.nix
+       ];
+     };
     };
   };
 
@@ -118,10 +117,11 @@ in
 
   users.mutableUsers = false;
 
+  nixpkgs.config.allowUnfree = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # pkgs.gnome3.gnome-tweaks
     vim
     (import ./emacs.nix { inherit pkgs; })
     wget
@@ -149,7 +149,37 @@ in
 
   # Enable Postgres
   services.postgresql.enable = true;
-  services.postgresql.package = pkgs.postgresql_14;
+  services.postgresql.package = pkgs.postgresql;
+
+  # Include pg_extension for LogParser
+  nixpkgs.overlays = [
+    (_: prev: {
+      postgresql = prev.postgresql // {
+        pkgs = prev.postgresql.pkgs // {
+          pg_logparser = prev.stdenv.mkDerivation {
+            pname = "pg_logparser";
+            version = "0.1";
+            buildInputs = [ prev.postgresql ];
+            src = /home/pascal/Documents/HowProv/PgQueryHauler/pg_extension-parse_query;
+            # src = builtins.fetchGit {
+            #   url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
+            #   rev = "78777f3157f46660fd160fb6a30368bdbd183480";
+            #   ref = "master";
+            # };
+            preBuild = ''
+              export DESTDIR=$out
+            '';
+            # postBuild = ''
+            #   cp parse_query.so $out/lib/
+            #   cp {parse_query--1.0.sql, parse_query.control} $out/share/postgresql/extension/
+            # '';
+          };
+        };
+      };
+    })
+  ];
+
+  services.postgresql.extraPlugins = [ pkgs.postgresql.pkgs.pg_logparser ];
 
   # Set ZSH shell
   programs.zsh.enable = true;
