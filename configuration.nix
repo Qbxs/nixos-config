@@ -97,11 +97,6 @@
     gcc
     git
     ghc
-    haskellPackages.haskell-language-server
-    haskellPackages.hlint
-    haskellPackages.hls-hlint-plugin
-    haskellPackages.brittany
-    haskellPackages.hls-brittany-plugin
     stack
     pandoc
     firefox
@@ -112,7 +107,14 @@
     vscode
     nordic
     nixpkgs-fmt
-  ];
+  ] ++
+  (with haskellPackages; [
+    haskell-language-server
+    hlint
+    hls-hlint-plugin
+    brittany
+    hls-brittany-plugin
+  ]);
 
   # Enable Postgres
   services.postgresql.enable = true;
