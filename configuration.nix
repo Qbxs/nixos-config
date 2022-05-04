@@ -10,7 +10,8 @@ let
 in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # ./emacs.nix
       # ./postgres.nix
@@ -32,7 +33,7 @@ in
     programs = {
       git = {
         enable = true;
-        userName  = real-name;
+        userName = real-name;
         userEmail = email;
         extraConfig = {
           color.ui = "auto";
@@ -42,15 +43,31 @@ in
           tag.ForceSignAnnotated = true;
         };
       };
-     vscode = {
-       enable = true;
-       extensions = with pkgs.vscode-extensions; [
-         yzhang.markdown-all-in-one
-         arcticicestudio.nord-visual-studio-code
-         haskell.haskell
-         bbenoist.nix
-       ];
-     };
+      emacs = {
+        enable = true;
+        extraPackages = epkgs: with epkgs; [
+          zerodark-theme
+          nix-mode
+          nixos-options
+          company-nixos-options
+          haskell-mode
+          flycheck
+          elpy
+          py-autopep8
+          evil
+          yasnippet
+          ess
+        ];
+      };
+      vscode = {
+        enable = true;
+        extensions = with pkgs.vscode-extensions; [
+          yzhang.markdown-all-in-one
+          arcticicestudio.nord-visual-studio-code
+          haskell.haskell
+          bbenoist.nix
+        ];
+      };
     };
   };
 
@@ -58,7 +75,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
- 
+
   networking.hostName = "pascal-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -122,7 +139,6 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim
     (import ./emacs.nix { inherit pkgs; })
     wget
     gnumake
@@ -133,7 +149,7 @@ in
     ghc
     haskellPackages.haskell-language-server
     haskellPackages.hlint
-    haskellPackages.hls-hlint-plugin 
+    haskellPackages.hls-hlint-plugin
     haskellPackages.brittany
     haskellPackages.hls-brittany-plugin
     stack
@@ -145,6 +161,7 @@ in
     discord
     vscode
     nordic
+    nixpkgs-fmt
   ];
 
   # Enable Postgres
@@ -188,7 +205,7 @@ in
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
-  
+
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   hardware.opengl.driSupport32Bit = true;
