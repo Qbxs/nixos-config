@@ -3,20 +3,15 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-  real-name = "Pascal Engel";
-  email = "ip4ssi@gmail.com";
-in
+
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # ./emacs.nix
+      ./home.nix
       # ./postgres.nix
       ./zsh.nix
-      (import "${home-manager}/nixos")
     ];
 
   nix = {
@@ -26,53 +21,6 @@ in
     '';
   };
 
-  home-manager.users.pascal = {
-    /* Here goes your home-manager config, eg home.packages = [ pkgs.foo ]; */
-    nixpkgs.config.allowUnfree = true;
-
-    programs = {
-      git = {
-        enable = true;
-        userName = real-name;
-        userEmail = email;
-        signing = {
-          gpgPath = "/run/current-system/sw/bin/gpg";
-          key = "3FFB5E924B624E438AA13488FDE0094719249572";
-          signByDefault = true;
-        };
-        extraConfig = {
-          color.ui = "auto";
-          commit.gpgsign = true;
-          tag.ForceSignAnnotated = true;
-        };
-      };
-      emacs = {
-        enable = true;
-        extraPackages = epkgs: with epkgs; [
-          zerodark-theme
-          nix-mode
-          nixos-options
-          company-nixos-options
-          haskell-mode
-          flycheck
-          elpy
-          py-autopep8
-          evil
-          yasnippet
-          ess
-        ];
-      };
-      vscode = {
-        enable = true;
-        extensions = with pkgs.vscode-extensions; [
-          yzhang.markdown-all-in-one
-          arcticicestudio.nord-visual-studio-code
-          haskell.haskell
-          bbenoist.nix
-        ];
-      };
-    };
-  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -97,10 +45,10 @@ in
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
 
   # Enable the X11 windowing system
   services.xserver.enable = true;
@@ -114,8 +62,8 @@ in
   services.xserver.desktopManager.plasma5.enable = true;
 
   # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
+  services.xserver.layout = "us,de";
+  services.xserver.xkbOptions = "eurosign:e";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
