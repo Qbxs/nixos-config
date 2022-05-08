@@ -36,7 +36,8 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.enp34s0.useDHCP = true;
+  networking.interfaces.enp4s0.useDHCP = true;
+  networking.interfaces.enp42s0.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -90,6 +91,16 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     (import ./emacs.nix { inherit pkgs; })
+    (
+      let
+        my-python-packages = python-packages: with python-packages; [
+          bottle
+          psycopg2
+        ];
+        python-with-my-packages = python3.withPackages my-python-packages;
+      in
+      python-with-my-packages
+    )
     wget
     gnumake
     gnupg
@@ -104,6 +115,7 @@
     signal-desktop
     slack
     discord
+    zoom-us
     vscode
     nordic
     nixpkgs-fmt
@@ -138,10 +150,13 @@
             preBuild = ''
               export DESTDIR=$out
             '';
-            # postBuild = ''
-            #   cp parse_query.so $out/lib/
-            #   cp {parse_query--1.0.sql, parse_query.control} $out/share/postgresql/extension/
-            # '';
+            installPhase = ''
+              mkdir -p $out/bin
+              mkdir -p $out/{lib,share/postgresql/extension}
+              cp *.so      $out/lib
+              cp *.sql     $out/share/postgresql/extension
+              cp *.control $out/share/postgresql/extension
+            '';
           };
         };
       };
@@ -149,6 +164,7 @@
   ];
 
   services.postgresql.extraPlugins = [ pkgs.postgresql.pkgs.pg_logparser ];
+  # services.postgresql.initialScript = ''psql -c "CREATE EXTENSION parse_query"'';
 
   # Set ZSH shell
   programs.zsh.enable = true;

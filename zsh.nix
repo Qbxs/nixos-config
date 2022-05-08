@@ -11,17 +11,18 @@
       plugins = [ "vi-mode" "per-directory-history" "pass" ];
     };
     shellAliases = {
-      # emacs = "emacsclient -c";
       ll = "ls -la";
       "." ="cd ..";
       ".." = "cd ../..";
       "..." = "cd ../../..";
       "...." = "cd ../../../..";
-      e = ''emacsclient -c'';
+      emacs = ''emacsclient -c'';
       nix-shell = ''nix-shell --run zsh'';
+      nixos-config = ''code /etc/nixos/configuration.nix'';
     };
     shellInit = ''
         export PATH=/home/pascal/.local/bin:$PATH
+        export PATH=/home/pascal/.cabal/bin/:$PATH
       '';
   };
 }
