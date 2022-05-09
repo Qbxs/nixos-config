@@ -25,6 +25,7 @@ in
         extraConfig = {
           color.ui = "auto";
           commit.gpgsign = true;
+          pull.rebase = false;
           tag.ForceSignAnnotated = true;
         };
       };
