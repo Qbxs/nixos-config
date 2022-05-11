@@ -26,6 +26,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.useOSProber = true;
 
+  # Set shorter timout for stop jobs on shutdown.
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
+
   networking.hostName = "pascal-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -132,9 +137,10 @@
   services.postgresql.enable = true;
   services.postgresql.package = pkgs.postgresql;
 
-  # Include pg_extension for LogParser
+  # Overlays
   nixpkgs.overlays = [
     (_: prev: {
+      # Include pg_extension for LogParser.
       postgresql = prev.postgresql // {
         pkgs = prev.postgresql.pkgs // {
           pg_logparser = prev.stdenv.mkDerivation {
@@ -160,6 +166,8 @@
           };
         };
       };
+      # Include Apple SF font.
+      san-francisco-mono-font = prev.callPackage ./san-francisco-mono-font { };
     })
   ];
 
