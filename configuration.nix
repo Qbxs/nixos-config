@@ -4,6 +4,16 @@
 
 { config, pkgs, ... }:
 
+# unused font, may be removed
+let sf-mono = pkgs.fetchFromGitHub {
+    owner  = "johnae";
+    repo   = "nixos-configuration";
+    rev    = "0a18ecf1a1626791f69de349530a536bd6c2f646";
+    sha256 = "KZgBGWHYqbdRgIZj8kn58LWgtA89a+RazXKfZsGYRxw=";
+  } + "/pkgs";
+
+in
+
 {
   imports =
     [
@@ -80,7 +90,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account.
   users.users.pascal = {
     isNormalUser = true;
     home = "/home/pascal";
@@ -106,24 +116,26 @@
       in
       python-with-my-packages
     )
+    # CLI tools
     wget
     gnumake
     gnupg
     pinentry
     gcc
     git
+    pandoc
+    texlive.combined.scheme-full
     ghc
     stack
-    pandoc
+    nordic
+    nixpkgs-fmt
+    # GUI Apps
+    discord
     firefox
     steam
     signal-desktop
     slack
-    discord
-    zoom-us
     vscode
-    nordic
-    nixpkgs-fmt
   ] ++
   (with haskellPackages; [
     haskell-language-server
@@ -152,7 +164,7 @@
             #   url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
             #   rev = "78777f3157f46660fd160fb6a30368bdbd183480";
             #   ref = "master";
-            # };
+            # } + "/pg_extension-parse_query";
             preBuild = ''
               export DESTDIR=$out
             '';
@@ -166,9 +178,16 @@
           };
         };
       };
-      # Include Apple SF font.
+      # Include Apple SF fonts.
+      # san-francisco-mono-font = prev.callPackage (sf-mono+"/san-francisco-mono-font") { };
+      # system-san-francisco-mono-font = prev.callPackage (sf-mono+"/system-san-francisco-font") { };
       san-francisco-mono-font = prev.callPackage ./san-francisco-mono-font { };
     })
+  ];
+
+  fonts.fonts = with pkgs; [
+    san-francisco-mono-font
+    # system-san-francisco-mono-font
   ];
 
   services.postgresql.extraPlugins = [ pkgs.postgresql.pkgs.pg_logparser ];

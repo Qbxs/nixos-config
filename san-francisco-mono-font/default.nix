@@ -94,8 +94,8 @@ stdenv.mkDerivation rec {
   meta = {
     description = "San Francisco Mono Font by Apple";
     homepage = https://github.com/ZulwiyozaPutra/SF-Mono-Font;
-    license = stdenv.lib.licenses.asl20;
-    platforms = stdenv.lib.platforms.all;
+    # license = stdenv.lib.licenses.asl20;
+    # platforms = stdenv.lib.platforms.all;
     maintainers = [];
   };
 }
