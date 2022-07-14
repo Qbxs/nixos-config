@@ -28,6 +28,13 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
+    auto-optimize = true;
+    gc = {
+      persistent = true;
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d"
+    };
   };
 
 
@@ -136,6 +143,7 @@ in
     signal-desktop
     slack
     vscode
+    zoom-us
   ] ++
   (with haskellPackages; [
     haskell-language-server
@@ -218,6 +226,9 @@ in
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Set local time zone (for consistency with windows on the same machine)
+  services.localtime.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
