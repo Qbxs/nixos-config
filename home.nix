@@ -9,6 +9,7 @@ in
   imports = [ (import "${home-manager}/nixos") ];
 
   home-manager.users.pascal = {
+    home.stateVersion = "22.05";
     /* Here goes your home-manager config, eg home.packages = [ pkgs.foo ]; */
     nixpkgs.config.allowUnfree = true;
 
