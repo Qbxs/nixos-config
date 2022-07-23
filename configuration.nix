@@ -28,12 +28,12 @@ in
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    auto-optimize = true;
+    autoOptimiseStore = true;
     gc = {
       persistent = true;
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 30d"
+      options = "--delete-older-than 30d";
     };
   };
 
@@ -98,13 +98,14 @@ in
   # services.xserver.libinput.enable = true;
 
   age.secrets.pass.file = ./pass.age;
+  age.identityPaths = [ "/root/.ssh/id_rsa" ];
 
   # Define a user account.
   users.users.pascal = {
     isNormalUser = true;
     home = "/home/pascal";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    passwordFile = config.age.secrets.pass.file;
+    passwordFile = config.age.secrets.pass.path;
     # "/etc/nixos/.pass.conf";
   };
 
@@ -164,31 +165,31 @@ in
   nixpkgs.overlays = [
     (_: prev: {
       # Include pg_extension for LogParser.
-      postgresql = prev.postgresql // {
-        pkgs = prev.postgresql.pkgs // {
-          pg_logparser = prev.stdenv.mkDerivation {
-            pname = "pg_logparser";
-            version = "0.1";
-            buildInputs = [ prev.postgresql ];
-            src = /home/pascal/Documents/HowProv/PgQueryHauler/pg_extension-parse_query;
-            # src = builtins.fetchGit {
-            #   url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
-            #   rev = "78777f3157f46660fd160fb6a30368bdbd183480";
-            #   ref = "master";
-            # } + "/pg_extension-parse_query";
-            preBuild = ''
-              export DESTDIR=$out
-            '';
-            installPhase = ''
-              mkdir -p $out/bin
-              mkdir -p $out/{lib,share/postgresql/extension}
-              cp *.so      $out/lib
-              cp *.sql     $out/share/postgresql/extension
-              cp *.control $out/share/postgresql/extension
-            '';
-          };
-        };
-      };
+      # postgresql = prev.postgresql // {
+      #   pkgs = prev.postgresql.pkgs // {
+      #     pg_logparser = prev.stdenv.mkDerivation {
+      #       pname = "pg_logparser";
+      #       version = "0.1";
+      #       buildInputs = [ prev.postgresql ];
+      #       src = /home/pascal/Documents/HowProv/PgQueryHauler/pg_extension-parse_query;
+      #       # src = builtins.fetchGit {
+      #       #   url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
+      #       #   rev = "78777f3157f46660fd160fb6a30368bdbd183480";
+      #       #   ref = "master";
+      #       # } + "/pg_extension-parse_query";
+      #       preBuild = ''
+      #         export DESTDIR=$out
+      #       '';
+      #       installPhase = ''
+      #         mkdir -p $out/bin
+      #         mkdir -p $out/{lib,share/postgresql/extension}
+      #         cp *.so      $out/lib
+      #         cp *.sql     $out/share/postgresql/extension
+      #         cp *.control $out/share/postgresql/extension
+      #       '';
+      #     };
+      #   };
+      # };
       # Include Apple SF fonts.
       # san-francisco-mono-font = prev.callPackage (sf-mono+"/san-francisco-mono-font") { };
       # system-san-francisco-mono-font = prev.callPackage (sf-mono+"/system-san-francisco-font") { };
@@ -201,7 +202,7 @@ in
     # system-san-francisco-mono-font
   ];
 
-  services.postgresql.extraPlugins = [ pkgs.postgresql.pkgs.pg_logparser ];
+  # services.postgresql.extraPlugins = [ pkgs.postgresql.pkgs.pg_logparser ];
   # services.postgresql.initialScript = ''psql -c "CREATE EXTENSION parse_query"'';
 
   # Set ZSH shell

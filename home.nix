@@ -1,12 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, home-manager, ... }:
 
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
   real-name = "Pascal Engel";
   email = "ip4ssi@gmail.com";
 in
 {
-  imports = [ (import "${home-manager}/nixos") ];
+  # imports = [ (import "${home-manager}/nixos") ];
 
   home-manager.users.pascal = {
     home.stateVersion = "22.05";
