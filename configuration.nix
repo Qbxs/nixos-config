@@ -97,12 +97,15 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  age.secrets.pass.file = ./pass.age;
+
   # Define a user account.
   users.users.pascal = {
     isNormalUser = true;
     home = "/home/pascal";
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    passwordFile = "/etc/nixos/.pass.conf";
+    passwordFile = config.age.secrets.pass.file;
+    # "/etc/nixos/.pass.conf";
   };
 
   users.mutableUsers = false;
