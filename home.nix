@@ -12,6 +12,13 @@ in
     /* Here goes your home-manager config, eg home.packages = [ pkgs.foo ]; */
     nixpkgs.config.allowUnfree = true;
 
+    systemd.user.services.mpris-proxy = {
+      Unit.Description = "Mpris proxy";
+      Unit.After = [ "network.target" "sound.target" ];
+      Service.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+      Install.WantedBy = [ "default.target" ];
+    };
+
     programs = {
       git = {
         enable = true;

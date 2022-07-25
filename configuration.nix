@@ -5,10 +5,11 @@
 { config, pkgs, ... }:
 
 # unused font, may be removed
-let sf-mono = pkgs.fetchFromGitHub {
-    owner  = "johnae";
-    repo   = "nixos-configuration";
-    rev    = "0a18ecf1a1626791f69de349530a536bd6c2f646";
+let sf-mono = pkgs.fetchFromGitHub
+  {
+    owner = "johnae";
+    repo = "nixos-configuration";
+    rev = "0a18ecf1a1626791f69de349530a536bd6c2f646";
     sha256 = "KZgBGWHYqbdRgIZj8kn58LWgtA89a+RazXKfZsGYRxw=";
   } + "/pkgs";
 
@@ -216,6 +217,10 @@ in
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   hardware.opengl.driSupport32Bit = true;
+
+  # Enable Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
