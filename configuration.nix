@@ -117,12 +117,13 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    (import ./emacs.nix { inherit pkgs; })
+    # (import ./emacs.nix { inherit pkgs; })
     (
       let
         my-python-packages = python-packages: with python-packages; [
           bottle
           psycopg2
+          pygments
         ];
         python-with-my-packages = python3.withPackages my-python-packages;
       in
@@ -147,7 +148,6 @@ in
     steam
     signal-desktop
     slack
-    vscode
     zoom-us
   ] ++
   (with haskellPackages; [

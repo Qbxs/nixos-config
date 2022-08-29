@@ -19,6 +19,8 @@ in
       Install.WantedBy = [ "default.target" ];
     };
 
+    
+
     programs = {
       git = {
         enable = true;
@@ -35,22 +37,6 @@ in
           pull.rebase = false;
           tag.ForceSignAnnotated = true;
         };
-      };
-      emacs = {
-        enable = true;
-        extraPackages = epkgs: with epkgs; [
-          zerodark-theme
-          nix-mode
-          nixos-options
-          company-nixos-options
-          haskell-mode
-          flycheck
-          elpy
-          py-autopep8
-          evil
-          yasnippet
-          ess
-        ];
       };
       vscode = {
         enable = true;
