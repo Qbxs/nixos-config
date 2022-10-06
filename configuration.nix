@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-newest, ... }:
 
 # unused font, may be removed
 let sf-mono = pkgs.fetchFromGitHub
@@ -25,7 +25,7 @@ in
     ];
 
   nix = {
-    package = pkgs.nixFlakes; # or versioned attributes like nix_2_7
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -76,13 +76,10 @@ in
   # Enable the X11 windowing system
   services.xserver.enable = true;
 
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
   # Enable KDE Plasma5 Desktop Enivronment
   services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  # security.wrappers.kcheckpass.source = "/run/wrappers/bin/kcheckpass";
 
   # Configure keymap in X11
   services.xserver.layout = "us,de";
@@ -136,14 +133,16 @@ in
     pinentry
     gcc
     git
+    idris2
     pandoc
     texlive.combined.scheme-full
     ghc
     stack
     nordic
     nixpkgs-fmt
+    kscreenlocker
     # GUI Apps
-    discord
+    pkgs-newest.discord
     firefox
     steam
     signal-desktop
@@ -163,45 +162,45 @@ in
   services.postgresql.package = pkgs.postgresql;
 
   # Overlays
-  nixpkgs.overlays = [
-    (_: prev: {
-      # Include pg_extension for LogParser.
-      # postgresql = prev.postgresql // {
-      #   pkgs = prev.postgresql.pkgs // {
-      #     pg_logparser = prev.stdenv.mkDerivation {
-      #       pname = "pg_logparser";
-      #       version = "0.1";
-      #       buildInputs = [ prev.postgresql ];
-      #       src = /home/pascal/Documents/HowProv/PgQueryHauler/pg_extension-parse_query;
-      #       # src = builtins.fetchGit {
-      #       #   url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
-      #       #   rev = "78777f3157f46660fd160fb6a30368bdbd183480";
-      #       #   ref = "master";
-      #       # } + "/pg_extension-parse_query";
-      #       preBuild = ''
-      #         export DESTDIR=$out
-      #       '';
-      #       installPhase = ''
-      #         mkdir -p $out/bin
-      #         mkdir -p $out/{lib,share/postgresql/extension}
-      #         cp *.so      $out/lib
-      #         cp *.sql     $out/share/postgresql/extension
-      #         cp *.control $out/share/postgresql/extension
-      #       '';
-      #     };
-      #   };
-      # };
-      # Include Apple SF fonts.
-      # san-francisco-mono-font = prev.callPackage (sf-mono+"/san-francisco-mono-font") { };
-      # system-san-francisco-mono-font = prev.callPackage (sf-mono+"/system-san-francisco-font") { };
-      san-francisco-mono-font = prev.callPackage ./san-francisco-mono-font { };
-    })
-  ];
+  # nixpkgs.overlays = [
+  #   (_: prev: {
+  #     Include pg_extension for LogParser.
+  #     postgresql = prev.postgresql // {
+  #       pkgs = prev.postgresql.pkgs // {
+  #         pg_logparser = prev.stdenv.mkDerivation {
+  #           pname = "pg_logparser";
+  #           version = "0.1";
+  #           buildInputs = [ prev.postgresql ];
+  #           src = /home/pascal/Documents/HowProv/PgQueryHauler/pg_extension-parse_query;
+  #           # src = builtins.fetchGit {
+  #           #   url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
+  #           #   rev = "78777f3157f46660fd160fb6a30368bdbd183480";
+  #           #   ref = "master";
+  #           # } + "/pg_extension-parse_query";
+  #           preBuild = ''
+  #             export DESTDIR=$out
+  #           '';
+  #           installPhase = ''
+  #             mkdir -p $out/bin
+  #             mkdir -p $out/{lib,share/postgresql/extension}
+  #             cp *.so      $out/lib
+  #             cp *.sql     $out/share/postgresql/extension
+  #             cp *.control $out/share/postgresql/extension
+  #           '';
+  #         };
+  #       };
+  #     };
+  #     Include Apple SF fonts.
+  #     san-francisco-mono-font = prev.callPackage (sf-mono+"/san-francisco-mono-font") { };
+  #     system-san-francisco-mono-font = prev.callPackage (sf-mono+"/system-san-francisco-font") { };
+  #     san-francisco-mono-font = prev.callPackage ./san-francisco-mono-font { };
+  #   })
+  # ];
 
-  fonts.fonts = with pkgs; [
-    san-francisco-mono-font
-    # system-san-francisco-mono-font
-  ];
+  # fonts.fonts = with pkgs; [
+  #   san-francisco-mono-font
+  #   system-san-francisco-mono-font
+  # ];
 
   # services.postgresql.extraPlugins = [ pkgs.postgresql.pkgs.pg_logparser ];
   # services.postgresql.initialScript = ''psql -c "CREATE EXTENSION parse_query"'';

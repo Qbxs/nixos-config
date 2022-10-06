@@ -7,6 +7,9 @@ in
 {
   # imports = [ (import "${home-manager}/nixos") ];
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+
   home-manager.users.pascal = {
     home.stateVersion = "22.05";
     /* Here goes your home-manager config, eg home.packages = [ pkgs.foo ]; */
@@ -19,7 +22,8 @@ in
       Install.WantedBy = [ "default.target" ];
     };
 
-    
+    # Enable emacs server
+    services.emacs.enable = true;
 
     programs = {
       git = {
