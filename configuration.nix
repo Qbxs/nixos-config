@@ -143,7 +143,6 @@ in
     stack
     nordic
     nixpkgs-fmt
-    kscreenlocker
     # GUI Apps
     pkgs-newest.discord
     firefox
