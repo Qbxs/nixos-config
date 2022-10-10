@@ -62,6 +62,9 @@ in
   networking.interfaces.enp4s0.useDHCP = true;
   networking.interfaces.enp42s0.useDHCP = true;
 
+  # Enable snowflake for repressed friends
+  services.snowflake-proxy.enable = true;
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
