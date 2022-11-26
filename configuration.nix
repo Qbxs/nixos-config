@@ -162,24 +162,25 @@ in
 
   # Enable Postgres
   services.postgresql.enable = true;
-  services.postgresql.package = pkgs.postgresql;
+  services.postgresql.package = pkgs.postgresql_13;
+  services.postgresql.extraPlugins = [pkgs.postgresql_13.pkgs.pg_logparser];
 
   # Overlays
   # nixpkgs.overlays = [
   #   (_: prev: {
-  #     Include pg_extension for LogParser.
-  #     postgresql = prev.postgresql // {
-  #       pkgs = prev.postgresql.pkgs // {
+  #     # Include pg_extension for LogParser.
+  #     postgresql_temp = prev.postgresql_13 // {
+  #       pkgs = prev.postgresql_13.pkgs // {
   #         pg_logparser = prev.stdenv.mkDerivation {
   #           pname = "pg_logparser";
   #           version = "0.1";
-  #           buildInputs = [ prev.postgresql ];
-  #           src = /home/pascal/Documents/HowProv/PgQueryHauler/pg_extension-parse_query;
-  #           # src = builtins.fetchGit {
-  #           #   url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
-  #           #   rev = "78777f3157f46660fd160fb6a30368bdbd183480";
-  #           #   ref = "master";
-  #           # } + "/pg_extension-parse_query";
+  #           buildInputs = [ prev.postgresql_13 ];
+  #           # src = /home/pascal/Documents/HowProv/PgQueryHauler/pg_extension-parse_query;
+  #           src = builtins.fetchGit {
+  #             url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
+  #             rev = "78777f3157f46660fd160fb6a30368bdbd183480";
+  #             ref = "master";
+  #           } + "/pg_extension-parse_query";
   #           preBuild = ''
   #             export DESTDIR=$out
   #           '';
@@ -193,10 +194,10 @@ in
   #         };
   #       };
   #     };
-  #     Include Apple SF fonts.
-  #     san-francisco-mono-font = prev.callPackage (sf-mono+"/san-francisco-mono-font") { };
-  #     system-san-francisco-mono-font = prev.callPackage (sf-mono+"/system-san-francisco-font") { };
-  #     san-francisco-mono-font = prev.callPackage ./san-francisco-mono-font { };
+  #     # Include Apple SF fonts.
+  #     # san-francisco-mono-font = prev.callPackage (sf-mono+"/san-francisco-mono-font") { };
+  #     # system-san-francisco-mono-font = prev.callPackage (sf-mono+"/system-san-francisco-font") { };
+  #     # san-francisco-mono-font = prev.callPackage ./san-francisco-mono-font { };
   #   })
   # ];
 
