@@ -163,7 +163,7 @@ in
   # Enable Postgres
   services.postgresql.enable = true;
   services.postgresql.package = pkgs.postgresql_13;
-  services.postgresql.extraPlugins = [pkgs.postgresql_13.pkgs.pg_logparser];
+  # services.postgresql.extraPlugins = [pkgs.postgresql_13.pkgs.pg_logparser];
 
   # Overlays
   # nixpkgs.overlays = [
