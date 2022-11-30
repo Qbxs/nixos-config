@@ -2,7 +2,7 @@
 
 let
   real-name = "Pascal Engel";
-  email = "ip4ssi@gmail.com";
+  email = "pascalengel@posteo.de";
 in
 {
   # imports = [ (import "${home-manager}/nixos") ];
