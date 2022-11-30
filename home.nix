@@ -33,11 +33,11 @@ in
         signing = {
           gpgPath = "/run/current-system/sw/bin/gpg";
           key = "3FFB5E924B624E438AA13488FDE0094719249572";
-          signByDefault = true;
+          signByDefault = false;
         };
         extraConfig = {
           color.ui = "auto";
-          commit.gpgsign = true;
+          commit.gpgsign = false;
           pull.rebase = false;
           tag.ForceSignAnnotated = true;
         };
