@@ -52,6 +52,18 @@ in
           bbenoist.nix
         ];
       };
+      alacritty = {
+        enable = true;
+        settings = {
+          dynamic_padding = true;
+          opacity = 0.85;
+          size = 8;
+        };
+      };
+      mangohud = {
+        enable = true;
+        enableSessionWide = true;
+      };
     };
   };
 }

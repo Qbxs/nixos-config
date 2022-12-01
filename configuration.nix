@@ -138,7 +138,7 @@
   environment.variables = {
     TERMINAL = "alacritty";
     EDITOR = "vim";
-    VISUAL = "code";
+    VISUAL = "vim";
   };
 
   # List packages installed in system profile. To search, run:
@@ -171,13 +171,24 @@
     signal-desktop
     slack
     vscode
+    zoom-us
     # Modding
     dxvk
     protontricks
     gnome.zenity
     dotnet-sdk
     p7zip
-  ];
+    mangohud
+  ] ++
+  (with haskellPackages; [
+    haskell-language-server
+    hlint
+    hls-hlint-plugin
+    brittany
+    ormolu
+    hls-brittany-plugin
+    hls-ormolu-plugin
+  ]);
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
