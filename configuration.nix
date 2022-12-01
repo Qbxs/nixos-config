@@ -84,7 +84,7 @@
 
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
   hardware.opengl = {
     enable = true;
@@ -144,6 +144,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # clis
     alacritty
     vim
     wget
