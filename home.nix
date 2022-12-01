@@ -48,6 +48,7 @@ in
           arcticicestudio.nord-visual-studio-code
           james-yu.latex-workshop
           yzhang.markdown-all-in-one
+          justusadam.language-haskell
           haskell.haskell
           bbenoist.nix
         ];
