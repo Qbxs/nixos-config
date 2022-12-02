@@ -84,7 +84,7 @@
 
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
 
   hardware.opengl = {
     enable = true;
@@ -135,10 +135,17 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Enable snowflake for repressed friends
+  services.snowflake-proxy.enable = true;
+
   environment.variables = {
     TERMINAL = "alacritty";
     EDITOR = "vim";
     VISUAL = "vim";
+    PATH = [
+      "/home/pascal/.local/bin"
+      "/home/pascal/.cabal/bin"
+    ];
   };
 
   # List packages installed in system profile. To search, run:
