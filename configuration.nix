@@ -84,7 +84,7 @@
 
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   hardware.opengl = {
     enable = true;
