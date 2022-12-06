@@ -201,8 +201,6 @@
     gnome.zenity
     dotnet-sdk
     mangohud
-    skse
-    mo2
   ] ++
   (with haskellPackages; [
     haskell-language-server
