@@ -1,4 +1,4 @@
-#! \bin\env bash
+#!/usr/bin/env bash
 env \
   PROTON_ENABLE_NVAPI=1 \
   DXVK_CONFIG_FILE=~/.dxvk.conf \

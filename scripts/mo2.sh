@@ -1,4 +1,4 @@
-#! \bin\env bash
+#!/usr/bin/env bash
 env \
   DOTNET_HOME=~/.steam/steam/steamapps/compatdata/489830/pfx/drive_c/windows/Microsoft.NET/Framework64/v4.0.30319 \
   PROTON_ENABLE_NVAPI=1 DXVK_CONFIG_FILE=~/.dxvk.conf \
