@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-newest, pkgs-unstable, ... }:
 
 {
   imports =
@@ -84,13 +84,22 @@
 
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
     extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
     setLdLibraryPath = true;
+  };
+
+  # Override nvidia drivers with unstable branch
+  boot.kernelPackages = pkgs-unstable.linuxPackages_latest;
+  nixpkgs.config.packageOverrides = pkgs: {
+    # Swap out all of the linux packages
+    linuxPackages_latest = pkgs-unstable.linuxPackages_latest;
+    # Make sure x11 will use the correct package as well
+    nvidia_x11 = pkgs-unstable.nvidia_x11;
   };
 
   # Enable CUPS to print documents.
@@ -152,7 +161,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # clis
-    alacritty
+    zsh-nix-shell
     vim
     wget
     gnumake
@@ -169,9 +178,13 @@
     nixpkgs-fmt
     ntfs3g
     gnome3.adwaita-icon-theme
+    unzip
+    unrar
+    p7zip
     # GUI Apps
+    alacritty
     lutris
-    discord
+    pkgs-newest.discord
     steam
     firefox
     thunderbird
@@ -180,12 +193,12 @@
     slack
     vscode
     zoom-us
-    # Modding
+    # Gaming
+    superTuxKart
     dxvk
     protontricks
     gnome.zenity
     dotnet-sdk
-    p7zip
     mangohud
   ] ++
   (with haskellPackages; [
@@ -200,7 +213,10 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  programs.steam.enable = true;
+  programs = {
+    gamemode.enable = true;
+    steam.enable = true;
+  };
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
   #   enable = true;

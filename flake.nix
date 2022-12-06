@@ -5,12 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     # for frequent updates, only update this input:
     nixpkgs-newest.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-newest, home-manager, nixos-hardware }: 
+  outputs = { self, nixpkgs, nixpkgs-newest, nixpkgs-unstable, home-manager, nixos-hardware }: 
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -21,12 +22,16 @@
         inherit system;
         config.allowUnfree = true;
       };
+      pkgs-unstable = import nixpkgs-unstable {
+        inherit system;
+        config.allowUnfree = true;
+      };
       lib = nixpkgs.lib;
     in {
       nixosConfigurations.pascal-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit pkgs pkgs-newest;
+          inherit pkgs pkgs-newest pkgs-unstable;
           defaultShell = "zsh";
         };
         modules = with nixos-hardware.nixosModules; [
