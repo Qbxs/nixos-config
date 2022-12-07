@@ -11,7 +11,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-newest, nixpkgs-unstable, home-manager, nixos-hardware }: 
+  outputs = { self, nixpkgs, nixpkgs-newest, nixpkgs-unstable, home-manager, nixos-hardware }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -27,7 +27,8 @@
         config.allowUnfree = true;
       };
       lib = nixpkgs.lib;
-    in {
+    in
+    {
       nixosConfigurations.pascal-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
@@ -46,5 +47,5 @@
         ];
       };
     };
-  }
+}
 

@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./zsh.nix
       ./home.nix
@@ -35,10 +36,10 @@
       efiSysMountPoint = "/boot/efi";
     };
     grub = {
-       enable = true;
-       devices = ["nodev"];
-       efiSupport = true;
-       useOSProber = true;
+      enable = true;
+      devices = [ "nodev" ];
+      efiSupport = true;
+      useOSProber = true;
     };
   };
 
@@ -134,7 +135,7 @@
   users.users.pascal = {
     isNormalUser = true;
     description = "Pascal";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio"];
+    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
     shell = pkgs.zsh;
   };
 
