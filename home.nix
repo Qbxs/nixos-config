@@ -51,6 +51,7 @@ in
           justusadam.language-haskell
           haskell.haskell
           bbenoist.nix
+          brettm12345.nixfmt-vscode
         ];
       };
       alacritty = {
