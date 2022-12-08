@@ -8,10 +8,11 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-newest, nixpkgs-unstable, home-manager, nixos-hardware }:
+  outputs = { self, nixpkgs, nixpkgs-newest, nixpkgs-unstable, home-manager, nix-doom-emacs, nixos-hardware }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -44,6 +45,15 @@
           ./configuration.nix
           nixpkgs.nixosModules.notDetected
           home-manager.nixosModules.home-manager
+          {
+            home-manager.users.pascal = { pkgs, ... }: {
+              imports = [ nix-doom-emacs.hmModule ];
+              programs.doom-emacs = {
+                enable = true;
+                doomPrivateDir = ./doom.d;
+              };
+            };
+          }
         ];
       };
     };
