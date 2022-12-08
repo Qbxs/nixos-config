@@ -6,6 +6,8 @@
 ;; use 'M-x doom/reload'.
 
 (package! latex-preview-pane)
+(package! haskell-mode)
+(package! lsp-haskell)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
