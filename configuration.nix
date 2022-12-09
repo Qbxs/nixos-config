@@ -200,6 +200,7 @@
     dxvk
     protontricks
     gnome.zenity
+    vkBasalt
     dotnet-sdk
     mangohud
   ] ++
