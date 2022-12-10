@@ -9,7 +9,6 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./zsh.nix
       ./home.nix
       ./scripts.nix
     ];
@@ -164,6 +163,7 @@
   environment.systemPackages = with pkgs; [
     # clis
     zsh-nix-shell
+    starship
     vim
     wget
     gnumake
