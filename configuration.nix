@@ -185,9 +185,7 @@
     p7zip
     # GUI Apps
     alacritty
-    lutris
     pkgs-newest.discord
-    steam
     firefox
     thunderbird
     discord
@@ -195,14 +193,6 @@
     slack
     vscode
     zoom-us
-    # Gaming
-    superTuxKart
-    dxvk
-    protontricks
-    gnome.zenity
-    vkBasalt
-    dotnet-sdk
-    mangohud
   ] ++
   (with haskellPackages; [
     haskell-language-server
