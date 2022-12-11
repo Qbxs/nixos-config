@@ -9,7 +9,7 @@
       vram = true;
       ram = true;
       gamemode = true;
-      vkBasalt = true;
+      vkbasalt = true;
       no_display = true;
     };
   };
