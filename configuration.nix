@@ -10,7 +10,6 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./home.nix
-      ./scripts.nix
     ];
 
   nix = {
@@ -204,12 +203,7 @@
     hls-ormolu-plugin
   ]);
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs = {
-    gamemode.enable = true;
-    steam.enable = true;
-  };
+  
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
   #   enable = true;

@@ -32,6 +32,7 @@
       ./home/alacritty
       ./home/git
       ./home/mangohud
+      ./home/scripts
       ./home/starship
       ./home/vscode
       ./home/zsh

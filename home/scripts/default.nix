@@ -4,7 +4,7 @@ let
   mo2 = pkgs.writeShellScriptBin "mo2" (builtins.readFile scripts/mo2.sh);
 in
 {
-  environment.systemPackages = [
+  home.packages = [
     skse
     mo2
   ];
