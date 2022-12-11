@@ -85,14 +85,13 @@ in
         settings = {
           add_newline = false;
           format = "
-[┌─\\(](57)$nix_shell$directory$git_branch$git_status[\\)](57) $cmd_duration$fill[\\(](57)$username$hostname[\\)](57)
-[└─\\[](57)$time[\\]─](57)$character";
+[┌─](57)$nix_shell$directory$git_branch$git_status[](57) $cmd_duration$fill[](57)$username$hostname[](57)
+[└─](57)$time[─](57)$character";
           username = {
             style_user = "bright-white";
             style_root = "bright-red bold";
             format = "[$user]($style)";
-            disabled = false;
-            show_always = true;
+            disabled = true;
           };
           hostname = {
             style = "bright-green bold";
@@ -135,9 +134,9 @@ in
             style = "bright-green bold";
           };
           character = {
-            success_symbol = "[→](57)";
-            error_symbol = "[→✘](red)";
-            vicmd_symbol = "[←](green)";
+            success_symbol = "[❯](57)";
+            error_symbol = "[✘](red)";
+            vicmd_symbol = "[❯](green)";
           };
         };
       };
