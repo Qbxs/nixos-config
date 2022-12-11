@@ -1,8 +1,6 @@
-{ config, pkgs, home-manager, ... }:
+{ inputs, lib, config, pkgs, home-manager, ... }:
 
 {
-  # imports = [ (import "${home-manager}/nixos") ];
-
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
@@ -10,6 +8,25 @@
     home.stateVersion = "22.05";
 
     nixpkgs.config.allowUnfree = true;
+
+    home.packages = with pkgs; [
+      # Games & Launchers
+      protontricks
+      steam
+      steam-run
+      lutris
+      superTuxKart
+
+      # Tools
+      dxvk
+      protontricks
+      gnome.zenity
+      dotnet-sdk
+
+      # Overlay & Post-Processing
+      mangohud
+      vkBasalt
+    ];
 
     imports = [
       ./home/alacritty
@@ -30,22 +47,5 @@
     # Enable emacs server
     services.emacs.enable = true;
 
-    home.packages = with pkgs; [
-      # Games & Launchers
-      protontricks
-      steam
-      steam-run
-      superTuxKart
-
-      # Tools
-      dxvk
-      protontricks
-      gnome.zenity
-      dotnet-sdk
-
-      # Overlay & Post-Processing
-      mangohud
-      vkBasalt
-    ];
   };
 }
