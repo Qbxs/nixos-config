@@ -11,6 +11,7 @@
       haskell.haskell
       bbenoist.nix
       brettm12345.nixfmt-vscode
+      vscodevim.vim
     ];
   };
 }
