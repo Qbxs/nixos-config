@@ -1,9 +1,12 @@
 { pkgs, ... }:
 
 {
-  programs.mangohud = {
+  programs.alacritty = {
     enable = true;
-    enableSessionWide = true;
-    settings.toggle_hud = "Shift_R+F12";
+    settings = {
+      dynamic_padding = true;
+      opacity = 0.85;
+      size = 8;
+    };
   };
 }
