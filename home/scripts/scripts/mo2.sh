@@ -6,6 +6,7 @@ env \
   DXVK_CONFIG_FILE=~/Modding/dxvk.conf \
   STEAM_COMPAT_CLIENT_INSTALL_PATH=/usr/games/steam \
   STEAM_COMPAT_DATA_PATH=~/.steam/steam/steamapps/compatdata/489830 \
-steam-run \
-  ~/.steam/steam/steamapps/common/Proton\ -\ Experimental/proton \
-  run ~/.steam/steam/steamapps/compatdata/489830/pfx/drive_c/Modding/MO2/ModOrganizer.exe
+gamemoderun \
+  steam-run \
+    ~/.steam/steam/steamapps/common/Proton\ -\ Experimental/proton \
+    run ~/Modding/MO2/ModOrganizer.exe

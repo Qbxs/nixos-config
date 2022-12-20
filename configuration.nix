@@ -147,14 +147,21 @@
   # Enable snowflake for repressed friends
   services.snowflake-proxy.enable = true;
 
-  environment.variables = {
+  environment.variables = rec {
+    XDG_CACHE_HOME = "\${HOME}/.cache";
+    XDG_CONFIG_HOME = "\${HOME}/.config";
+    XDG_BIN_HOME = "\${HOME}/.local/bin";
+    XDG_DATA_HOME = "\${HOME}/.local/share";
     TERMINAL = "alacritty";
     EDITOR = "vim";
     VISUAL = "vim";
+    # note: this doesn't replace PATH, it just adds this to it
     PATH = [
-      "/home/pascal/.local/bin"
+      "\${XDG_BIN_HOME}"
       "/home/pascal/.cabal/bin"
     ];
+    # Steam needs this to find Proton-GE
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
   };
 
   # List packages installed in system profile. To search, run:
@@ -203,7 +210,7 @@
     hls-ormolu-plugin
   ]);
 
-  
+
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
   #   enable = true;

@@ -9,4 +9,4 @@ env \
 gamemoderun \
   steam-run \
     ~/.steam/steam/steamapps/common/Proton\ -\ Experimental/proton \
-    run ~/.steam/steam/steamapps/compatdata/489830/pfx/drive_c/users/steamuser/Desktop/SKSE.lnk
+    run ~/.local/share/Steam/steamapps/compatdata/489830/pfx/drive_c/users/steamuser/Desktop/SKSE.lnk
