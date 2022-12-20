@@ -50,7 +50,7 @@
           set-term-title ''${(V%):-"%~"}
         fi
       }
-      neofetch
+      freshfetch
     '';
   };
 }
