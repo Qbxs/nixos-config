@@ -32,13 +32,13 @@
     ];
 
     imports = [
-      ./home/alacritty
-      ./home/git
-      ./home/mangohud
-      ./home/scripts
-      ./home/starship
-      ./home/vscode
-      ./home/zsh
+      ./alacritty
+      ./git
+      ./mangohud
+      ./scripts
+      ./starship
+      ./vscode
+      ./zsh
     ];
 
     systemd.user.services.mpris-proxy = {

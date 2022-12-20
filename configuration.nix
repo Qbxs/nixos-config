@@ -9,7 +9,8 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./home.nix
+      # Include the home manager configuration
+      ./home
     ];
 
   nix = {

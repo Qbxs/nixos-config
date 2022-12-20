@@ -8,6 +8,8 @@
         opacity = 0.85;
         padding.x = 5;
         padding.y = 5;
+        columns = 100;
+        lines = 31;
       };
       draw_bold_text_with_bright_colors = true;
       colors = {
