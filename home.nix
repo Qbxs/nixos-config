@@ -10,6 +10,8 @@
     nixpkgs.config.allowUnfree = true;
 
     home.packages = with pkgs; [
+      neofetch
+
       # Games & Launchers
       gamemode
       protontricks
