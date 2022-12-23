@@ -158,7 +158,7 @@
     VISUAL = "vim";
     # note: this doesn't replace PATH, it just adds this to it
     PATH = [
-      "\${XDG_BIN_HOME}"
+      "${XDG_BIN_HOME}"
       "/home/pascal/.cabal/bin"
     ];
     # Steam needs this to find Proton-GE
