@@ -10,21 +10,21 @@
     nixpkgs.config.allowUnfree = true;
 
     home.packages = with pkgs; [
+      # Terminal
       freshfetch
 
-      # Games & Launchers
+      # Launchers & Tools
       gamemode
       protontricks
       steam
       steam-run
       lutris
-      superTuxKart
-
-      # Tools
       dxvk
-      protontricks
       gnome.zenity
-      dotnet-sdk
+      
+      # Games
+      minecraft
+      superTuxKart
 
       # Overlay & Post-Processing
       mangohud
