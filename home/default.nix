@@ -11,6 +11,7 @@
 
     home.packages = with pkgs; [
       # Terminal
+      starship
       freshfetch
 
       # Launchers & Tools
@@ -23,7 +24,7 @@
       gnome.zenity
       
       # Games
-      minecraft
+      prismlauncher
       superTuxKart
 
       # Overlay & Post-Processing
