@@ -178,8 +178,8 @@
     gcc
     git
     idris2
-    #pandoc
-    #texlive.combined.scheme-full
+    pandoc
+    texlive.combined.scheme-full
     ghc
     stack
     nordic
@@ -199,6 +199,17 @@
     slack
     vscode
     zoom-us
+    (
+      let
+        my-python-packages = python-packages: with python-packages; [
+          bottle
+          psycopg2
+          pygments
+        ];
+        python-with-my-packages = python3.withPackages my-python-packages;
+      in
+      python-with-my-packages
+    )
   ] ++
   (with haskellPackages; [
     haskell-language-server
