@@ -180,8 +180,8 @@
     idris2
     pandoc
     texlive.combined.scheme-full
-    ghc
-    stack
+    pkgs-unstable.ghc
+    pkgs-unstable.stack
     nordic
     nixpkgs-fmt
     ntfs3g
@@ -199,6 +199,7 @@
     slack
     vscode
     zoom-us
+    # Python
     (
       let
         my-python-packages = python-packages: with python-packages; [
@@ -211,6 +212,7 @@
       python-with-my-packages
     )
   ] ++
+  # Haskell
   (with haskellPackages; [
     haskell-language-server
     hlint

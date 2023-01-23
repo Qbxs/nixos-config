@@ -1,4 +1,4 @@
-{ inputs, lib, config, pkgs, home-manager, ... }:
+{ inputs, lib, config, pkgs, pkgs-unstable, home-manager, ... }:
 
 {
   home-manager.useGlobalPkgs = true;
@@ -16,7 +16,7 @@
 
       # Launchers & Tools
       gamemode
-      protontricks
+      pkgs-unstable.protontricks
       steam
       steam-run
       lutris
