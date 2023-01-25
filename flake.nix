@@ -64,7 +64,7 @@
       nixosConfigurations.pascal-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit pkgs pkgs-newest pkgs-unstable;
+          inherit nixpkgs pkgs pkgs-newest pkgs-unstable;
           defaultShell = "zsh";
         };
         modules = with nixos-hardware.nixosModules; [
@@ -77,12 +77,23 @@
           nixpkgs.nixosModules.notDetected
           home-manager.nixosModules.home-manager
           {
-            home-manager.users.pascal = { pkgs, ... }: {
+            home-manager.users.pascal = { pkgs, config, ... }: {
               imports = [ nix-doom-emacs.hmModule ];
               programs.doom-emacs = {
                 enable = true;
                 doomPrivateDir = ./doom.d;
               };
+              xdg = {
+                enable = true;
+                configFile."nix/inputs/nixpkgs".source = nixpkgs.outPath;
+              };
+              home.sessionVariables.NIX_PATH =
+                "nixpkgs=${config.xdg.configHome}/nix/inputs/nixpkgs\${NIX_PATH:+:$NIX_PATH}";
+              nix.registry.nixpkgs.flake = self;
+            };
+            nix = {
+              registry.nixpkgs.flake = self;
+              nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
             };
           }
         ];

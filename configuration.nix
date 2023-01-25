@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, pkgs-newest, pkgs-unstable, ... }:
+{ config, nixpkgs,pkgs, pkgs-newest, pkgs-unstable, ... }:
 
 {
   imports =
@@ -180,8 +180,8 @@
     idris2
     pandoc
     texlive.combined.scheme-full
-    pkgs-unstable.ghc
-    pkgs-unstable.stack
+    ghc
+    stack
     nordic
     nixpkgs-fmt
     ntfs3g
