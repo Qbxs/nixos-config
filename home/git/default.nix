@@ -11,12 +11,12 @@ in
     userEmail = email;
     signing = {
       gpgPath = "/run/current-system/sw/bin/gpg";
-      key = "3FFB5E924B624E438AA13488FDE0094719249572";
-      signByDefault = false;
+      key = "4CAB911AED307462D14E23E6B7FC7F03E3C8EE74";
+      signByDefault = true;
     };
     extraConfig = {
       color.ui = "auto";
-      commit.gpgsign = false;
+      commit.gpgsign = true;
       pull.rebase = false;
       tag.ForceSignAnnotated = true;
     };
