@@ -20,6 +20,8 @@
       ".." = "cd ../..";
       "..." = "cd ../../..";
       "...." = "cd ../../../..";
+      gs = "git status";
+      gd = "git diff";
       emacs = ''emacsclient -c -a "emacs"'';
       nix-shell = ''nix-shell --run zsh'';
       nixos-config = ''code ~/nixos-config/.'';
