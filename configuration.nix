@@ -180,6 +180,7 @@
     idris2
     pandoc
     texlive.combined.scheme-full
+    ripgrep
     ghc
     stack
     nordic
