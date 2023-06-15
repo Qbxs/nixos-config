@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 env \
-  ENABLE_VKBASALT=1 \
+  # ENABLE_VKBASALT=1 \
   PROTON_ENABLE_NVAPI=1 \
   PROTON_HIDE_NVIDIA_GPU=0 \
   DXVK_CONFIG_FILE=~/Modding/dxvk.conf \
