@@ -8,5 +8,5 @@ env \
   STEAM_COMPAT_DATA_PATH=~/.steam/steam/steamapps/compatdata/489830 \
 gamemoderun \
   steam-run \
-    ~/.steam/steam/steamapps/common/Proton\ -\ Experimental/proton \
+    ~/.steam/steam/steamapps/common/Proton\ 8.0/proton \
     run ~/Modding/MO2/ModOrganizer.exe

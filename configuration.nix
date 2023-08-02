@@ -181,6 +181,7 @@
     pandoc
     texlive.combined.scheme-full
     ripgrep
+    fd
     ghc
     stack
     nordic
@@ -219,9 +220,7 @@
     haskell-language-server
     hlint
     hls-hlint-plugin
-    brittany
     ormolu
-    hls-brittany-plugin
     hls-ormolu-plugin
   ]);
 
@@ -232,7 +231,11 @@
     enableSSHSupport = true;
   };
   services.pcscd.enable = true;
-  
+
+  # zsh
+  programs.zsh.enable = true;
+
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
