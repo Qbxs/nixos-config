@@ -89,10 +89,10 @@
               };
               home.sessionVariables.NIX_PATH =
                 "nixpkgs=${config.xdg.configHome}/nix/inputs/nixpkgs\${NIX_PATH:+:$NIX_PATH}";
-              nix.registry.nixpkgs.flake = self;
+              nix.registry.nixpkgs.flake = inputs.nixpkgs;
             };
             nix = {
-              registry.nixpkgs.flake = self;
+              registry.nixpkgs.flake = inputs.nixpkgs;
               nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
             };
           }
