@@ -197,6 +197,7 @@
     firefox
     thunderbird
     discord
+    mumble
     signal-desktop
     slack
     vlc
