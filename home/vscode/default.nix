@@ -4,7 +4,7 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
-      arcticicestudio.nord-visual-studio-code
+      one-dark-theme
       james-yu.latex-workshop
       yzhang.markdown-all-in-one
       justusadam.language-haskell
