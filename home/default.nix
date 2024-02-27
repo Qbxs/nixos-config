@@ -52,5 +52,9 @@
     # Enable emacs server
     services.emacs.enable = true;
 
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 }
