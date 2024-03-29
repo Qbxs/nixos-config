@@ -20,6 +20,7 @@
       steam
       steam-run
       lutris
+      wine
       dxvk
       gnome.zenity
       
