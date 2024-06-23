@@ -74,20 +74,26 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
-  programs.hyprland.enable = true;
+  # programs.hyprland.enable = true;
 
   # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
+  services.xserver.xkb.layout = "us";
 
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  boot.kernelParams = [ "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" ];
+
+  boot.initrd.kernelModules = [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_uvm"
+    "nvidia_drm"
+  ];
 
   hardware.opengl = {
     enable = true;
@@ -97,14 +103,14 @@
   };
 
   # Override nvidia drivers with unstable branch
-  boot.kernelPackages = pkgs-unstable.linuxPackages_latest;
-  nixpkgs.config.packageOverrides = pkgs: {
-    # Swap out all of the linux packages
-    linuxPackages_latest = pkgs-unstable.linuxPackages_latest;
-    # Make sure x11 will use the correct package as well
-    nvidia_x11 = pkgs-unstable.nvidia_x11;
-  };
-
+  # boot.kernelPackages = pkgs-unstable.linuxPackages_latest;
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   # Swap out all of the linux packages
+  #   linuxPackages_latest = pkgs-unstable.linuxPackages_latest;
+  #   # Make sure x11 will use the correct package as well
+  #   nvidia_x11 = pkgs-unstable.nvidia_x11;
+  # };
+    
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -141,8 +147,8 @@
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "pascal";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "pascal";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -222,9 +228,7 @@
   (with haskellPackages; [
     haskell-language-server
     hlint
-    hls-hlint-plugin
     ormolu
-    hls-ormolu-plugin
   ]);
 
 
