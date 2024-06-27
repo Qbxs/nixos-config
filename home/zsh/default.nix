@@ -52,7 +52,7 @@
           set-term-title ''${(V%):-"%~"}
         fi
       }
-      freshfetch
+      fastfetch
     '';
   };
 }

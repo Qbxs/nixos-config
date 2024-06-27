@@ -12,7 +12,7 @@
     home.packages = with pkgs; [
       # Terminal
       starship
-      freshfetch
+      fastfetch
 
       # Launchers & Tools
       gamemode
