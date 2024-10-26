@@ -17,6 +17,7 @@
   home-manager.users.pascal = {
 
     imports = [
+      ./git
       ./vscode
       ./mangohud
       ./scripts

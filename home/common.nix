@@ -17,7 +17,6 @@
 
     imports = [
       ./alacritty
-      ./git
       ./starship
       ./zsh
     ];
