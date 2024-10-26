@@ -1,19 +1,22 @@
 { inputs, lib, config, pkgs, pkgs-unstable, home-manager, ... }:
 
 {
+  imports = [
+    ./common.nix
+  ];
+
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
   home-manager.users.pascal = {
-    home.stateVersion = "22.05";
 
-    nixpkgs.config.allowUnfree = true;
+    imports = [
+      ./vscode
+      ./mangohud
+      ./scripts
+    ];
 
     home.packages = with pkgs; [
-      # Terminal
-      starship
-      fastfetch
-
       # Launchers & Tools
       gamemode
       pkgs-unstable.protontricks
@@ -33,16 +36,6 @@
       vkBasalt
     ];
 
-    imports = [
-      ./alacritty
-      ./git
-      ./mangohud
-      ./scripts
-      ./starship
-      ./vscode
-      ./zsh
-    ];
-
     systemd.user.services.mpris-proxy = {
       Unit.Description = "Mpris proxy";
       Unit.After = [ "network.target" "sound.target" ];
@@ -58,4 +51,5 @@
       nix-direnv.enable = true;
     };
   };
+
 }

@@ -11,9 +11,11 @@
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     # nix-doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-newest, nixpkgs-unstable, home-manager, nixos-hardware }:
+  outputs = { self, nixpkgs, nixpkgs-newest, nixpkgs-unstable, home-manager, nixos-hardware, nixos-wsl, agenix }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -64,7 +66,7 @@
       nixosConfigurations.pascal-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit nixpkgs pkgs pkgs-newest pkgs-unstable;
+          inherit nixpkgs pkgs pkgs-newest pkgs-unstable agenix;
           defaultShell = "zsh";
         };
         modules = with nixos-hardware.nixosModules; [
@@ -73,8 +75,9 @@
           common-pc-ssd
           common-cpu-amd
           common-gpu-nvidia-nonprime
-          ./configuration.nix
+          ./configuration/default.nix
           nixpkgs.nixosModules.notDetected
+          agenix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.users.pascal = { pkgs, config, ... }: {
@@ -98,6 +101,20 @@
           }
         ];
       };
+    nixosConfigurations.wsl-nixos = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit nixpkgs pkgs pkgs-newest pkgs-unstable agenix;
+          defaultShell = "zsh";
+        };
+        modules = [
+          nixos-wsl.nixosModules.default
+          ./configuration/wsl.nix
+          nixpkgs.nixosModules.notDetected
+          agenix.nixosModules.default
+          home-manager.nixosModules.home-manager
+        ];
+    };
     };
 }
 
