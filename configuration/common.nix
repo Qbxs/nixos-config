@@ -1,11 +1,22 @@
-{ config, nixpkgs, pkgs, pkgs-newest, pkgs-unstable, agenix, ... }:
+{
+  config,
+  nixpkgs,
+  pkgs,
+  pkgs-newest,
+  pkgs-unstable,
+  agenix,
+  ...
+}:
 
 {
   age.secrets.github-token.file = ../secrets/github-token.age;
   nix = {
     package = pkgs.nixVersions.stable;
     settings = {
-      experimental-features = [ "flakes" "nix-command" ];
+      experimental-features = [
+        "flakes"
+        "nix-command"
+      ];
       auto-optimise-store = true;
     };
     gc = {
@@ -15,10 +26,9 @@
       options = "--delete-older-than 30d";
     };
     extraOptions = ''
-        !include ${config.age.secrets.github-token.path}
-      '';
+      !include ${config.age.secrets.github-token.path}
+    '';
   };
-
 
   # programs.mtr.enable = true;
   programs.gnupg.agent = {
@@ -29,7 +39,6 @@
 
   # zsh
   programs.zsh.enable = true;
-
 
   # List services that you want to enable:
 
@@ -62,28 +71,33 @@
   };
 
   environment.systemPackages = with pkgs; [
-      # clis
-      zsh-nix-shell
-      vim
-      wget
-      gnumake
-      gnupg
-      pinentry
-      git
-      ripgrep
-      fd
-      nixpkgs-fmt
-      unzip
-      unrar
-      p7zip
-      agenix.packages.${system}.default
+    # clis
+    zsh-nix-shell
+    vim
+    wget
+    gnumake
+    gnupg
+    pinentry
+    git
+    ripgrep
+    fd
+    nixfmt-rfc-style
+    unzip
+    unrar
+    p7zip
+    agenix.packages.${system}.default
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pascal = {
     isNormalUser = true;
     description = "Pascal";
-    extraGroups = [ "networkmanager" "wheel" "video" "audio" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "audio"
+    ];
     shell = pkgs.zsh;
   };
 

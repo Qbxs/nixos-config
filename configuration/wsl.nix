@@ -1,12 +1,18 @@
-{ config, nixpkgs, pkgs, pkgs-newest, pkgs-unstable, ... }:
+{
+  config,
+  nixpkgs,
+  pkgs,
+  pkgs-newest,
+  pkgs-unstable,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./common.nix
-      # Include the home manager configuration
-      ../home/wsl.nix
-    ];
+  imports = [
+    ./common.nix
+    # Include the home manager configuration
+    ../home/wsl.nix
+  ];
 
   wsl.enable = true;
   wsl.defaultUser = "pascal";

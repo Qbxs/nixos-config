@@ -15,7 +15,17 @@
     agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-newest, nixpkgs-unstable, home-manager, nixos-hardware, nixos-wsl, agenix }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-newest,
+      nixpkgs-unstable,
+      home-manager,
+      nixos-hardware,
+      nixos-wsl,
+      agenix,
+    }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -66,7 +76,13 @@
       nixosConfigurations.pascal-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit nixpkgs pkgs pkgs-newest pkgs-unstable agenix;
+          inherit
+            nixpkgs
+            pkgs
+            pkgs-newest
+            pkgs-unstable
+            agenix
+            ;
           defaultShell = "zsh";
         };
         modules = with nixos-hardware.nixosModules; [
@@ -80,20 +96,21 @@
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
-            home-manager.users.pascal = { pkgs, config, ... }: {
-              # imports = [ nix-doom-emacs.hmModule ];
-              # programs.doom-emacs = {
-              #   enable = true;
-              #   doomPrivateDir = ./doom.d;
-              # };
-              xdg = {
-                enable = true;
-                configFile."nix/inputs/nixpkgs".source = nixpkgs.outPath;
+            home-manager.users.pascal =
+              { pkgs, config, ... }:
+              {
+                # imports = [ nix-doom-emacs.hmModule ];
+                # programs.doom-emacs = {
+                #   enable = true;
+                #   doomPrivateDir = ./doom.d;
+                # };
+                xdg = {
+                  enable = true;
+                  configFile."nix/inputs/nixpkgs".source = nixpkgs.outPath;
+                };
+                home.sessionVariables.NIX_PATH = "nixpkgs=${config.xdg.configHome}/nix/inputs/nixpkgs\${NIX_PATH:+:$NIX_PATH}";
+                nix.registry.nixpkgs.flake = nixpkgs;
               };
-              home.sessionVariables.NIX_PATH =
-                "nixpkgs=${config.xdg.configHome}/nix/inputs/nixpkgs\${NIX_PATH:+:$NIX_PATH}";
-              nix.registry.nixpkgs.flake = nixpkgs;
-            };
             nix = {
               registry.nixpkgs.flake = nixpkgs;
               nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
@@ -101,10 +118,16 @@
           }
         ];
       };
-    nixosConfigurations.wsl-nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.wsl-nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit nixpkgs pkgs pkgs-newest pkgs-unstable agenix;
+          inherit
+            nixpkgs
+            pkgs
+            pkgs-newest
+            pkgs-unstable
+            agenix
+            ;
           defaultShell = "zsh";
         };
         modules = [
@@ -114,7 +137,6 @@
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
         ];
-    };
+      };
     };
 }
-

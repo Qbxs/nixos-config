@@ -1,4 +1,12 @@
-{ inputs, lib, config, pkgs, pkgs-unstable, home-manager, ... }:
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  pkgs-unstable,
+  home-manager,
+  ...
+}:
 
 {
   home-manager.useGlobalPkgs = true;

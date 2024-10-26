@@ -1,9 +1,15 @@
-{ inputs, lib, config, pkgs, pkgs-unstable, home-manager, ... }:
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  pkgs-unstable,
+  home-manager,
+  ...
+}:
 
 {
-  imports = [
-    ./common.nix
-  ];
+  imports = [ ./common.nix ];
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
@@ -26,7 +32,7 @@
       wine
       dxvk
       gnome.zenity
-      
+
       # Games
       prismlauncher
       superTuxKart
@@ -38,7 +44,10 @@
 
     systemd.user.services.mpris-proxy = {
       Unit.Description = "Mpris proxy";
-      Unit.After = [ "network.target" "sound.target" ];
+      Unit.After = [
+        "network.target"
+        "sound.target"
+      ];
       Service.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
       Install.WantedBy = [ "default.target" ];
     };

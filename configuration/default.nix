@@ -1,15 +1,20 @@
-{ config, nixpkgs, pkgs, pkgs-newest, pkgs-unstable, ... }:
+{
+  config,
+  nixpkgs,
+  pkgs,
+  pkgs-newest,
+  pkgs-unstable,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./common.nix
-      # Include the results of the hardware scan.
-      ../hardware-configuration.nix
-      # Include the home manager configuration
-      ../home/default.nix
-    ];
-
+  imports = [
+    ./common.nix
+    # Include the results of the hardware scan.
+    ../hardware-configuration.nix
+    # Include the home manager configuration
+    ../home/default.nix
+  ];
 
   # Bootloader.
   boot.loader = {
@@ -29,7 +34,6 @@
   networking.hostName = "pascal-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -46,7 +50,10 @@
   # NVIDIA drivers
   services.xserver.videoDrivers = [ "nvidia" ];
   # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  boot.kernelParams = [ "nvidia_drm.fbdev=1" "nvidia_drm.modeset=1" ];
+  boot.kernelParams = [
+    "nvidia_drm.fbdev=1"
+    "nvidia_drm.modeset=1"
+  ];
 
   boot.initrd.kernelModules = [
     "nvidia"
@@ -70,7 +77,7 @@
   #   # Make sure x11 will use the correct package as well
   #   nvidia_x11 = pkgs-unstable.nvidia_x11;
   # };
-    
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -127,50 +134,52 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    # clis
-    idris2
-    pandoc
-    texlive.combined.scheme-full
-    ghc
-    stack
-    nordic
-    nixpkgs-fmt
-    ntfs3g
-    gnome3.adwaita-icon-theme
-    # GUI Apps
-    alacritty
-    pkgs-newest.discord
-    firefox
-    thunderbird
-    discord
-    mumble
-    signal-desktop
-    slack
-    vlc
-    vscode
-    zoom-us
-    # Python
-    (
-      let
-        my-python-packages = python-packages: with python-packages; [
-          bottle
-          psycopg2
-          pygments
-        ];
-        python-with-my-packages = python3.withPackages my-python-packages;
-      in
-      python-with-my-packages
-    )
-  ] ++
-  # Haskell
-  (with haskellPackages; [
-    haskell-language-server
-    hlint
-    ormolu
-  ]);
-
-
+  environment.systemPackages =
+    with pkgs;
+    [
+      # clis
+      idris2
+      pandoc
+      texlive.combined.scheme-full
+      ghc
+      stack
+      nordic
+      nixpkgs-fmt
+      ntfs3g
+      gnome3.adwaita-icon-theme
+      # GUI Apps
+      alacritty
+      pkgs-newest.discord
+      firefox
+      thunderbird
+      discord
+      mumble
+      signal-desktop
+      slack
+      vlc
+      vscode
+      zoom-us
+      # Python
+      (
+        let
+          my-python-packages =
+            python-packages: with python-packages; [
+              bottle
+              psycopg2
+              pygments
+            ];
+          python-with-my-packages = python3.withPackages my-python-packages;
+        in
+        python-with-my-packages
+      )
+    ]
+    ++
+      # Haskell
+      (with haskellPackages; [
+        haskell-language-server
+        hlint
+        ormolu
+      ]);
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 8080 ];

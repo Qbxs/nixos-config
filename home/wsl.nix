@@ -1,7 +1,13 @@
-{ inputs, lib, config, pkgs, pkgs-unstable, home-manager, ... }:
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  pkgs-unstable,
+  home-manager,
+  ...
+}:
 
 {
-    imports = [
-      ./common.nix
-    ];
+  imports = [ ./common.nix ];
 }
