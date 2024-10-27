@@ -121,7 +121,6 @@
     XDG_BIN_HOME = "\${HOME}/.local/bin";
     XDG_DATA_HOME = "\${HOME}/.local/share";
     TERMINAL = "alacritty";
-    EDITOR = "vim";
     VISUAL = "vim";
     # note: this doesn't replace PATH, it just adds this to it
     PATH = [

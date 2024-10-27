@@ -101,4 +101,8 @@
     shell = pkgs.zsh;
   };
 
+  environment.variables = {
+    EDITOR = "vim";
+  };
+
 }
