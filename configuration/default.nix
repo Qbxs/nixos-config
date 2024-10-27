@@ -105,9 +105,9 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "pascal";
+  # user password
+  age.secrets.password.file = ../secrets/password.age;
+  users.users.pascal.passwordFile = config.age.secrets.password.path;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

@@ -10,4 +10,7 @@ in
     nixos_key
     macos_key
   ];
+  "password.age".publicKeys = [
+    nixos_key
+  ];
 }
