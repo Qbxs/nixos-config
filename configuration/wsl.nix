@@ -10,7 +10,6 @@
 {
   imports = [
     ./common.nix
-    # Include the home manager configuration
     ../home/wsl.nix
   ];
 

@@ -30,36 +30,6 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
-        # overlays = [
-        #   (_: prev: {
-        #     # Include pg_extension for LogParser.
-        #     postgresql_13 = prev.postgresql_13 // {
-        #       pkgs = prev.postgresql_13.pkgs // {
-        #         pg_logparser = prev.stdenv.mkDerivation {
-        #           pname = "pg_logparser";
-        #           version = "0.1";
-        #           buildInputs = [ prev.postgresql_13 ];
-        #           src = /home/pascal/Documents/HowProv/PgQueryHauler/pg_extension-parse_query;
-        #           # src = builtins.fetchGit {
-        #           #   url = "ssh://git@dbworld.informatik.uni-tuebingen.de:PgQueryHauler.git";
-        #           #   rev = "78777f3157f46660fd160fb6a30368bdbd183480";
-        #           #   ref = "master";
-        #           # } + "/pg_extension-parse_query";
-        #           preBuild = ''
-        #             export DESTDIR=$out
-        #           '';
-        #           installPhase = ''
-        #             mkdir -p $out/bin
-        #             mkdir -p $out/{lib,share/postgresql/extension}
-        #             cp *.so      $out/lib
-        #             cp *.sql     $out/share/postgresql/extension
-        #             cp *.control $out/share/postgresql/extension
-        #           '';
-        #         };
-        #       };
-        #     };
-        #   })
-        # ];
         config.allowUnfree = true;
       };
       pkgs-newest = import nixpkgs-newest {
