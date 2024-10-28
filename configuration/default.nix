@@ -10,7 +10,7 @@
 {
   imports = [
     ./common.nix
-    ../hardware-configuration.nix
+    ./hardware-configuration.nix
     ../home/default.nix
   ];
 
@@ -87,7 +87,7 @@
 
   # user password
   age.secrets.password.file = ../secrets/password.age;
-  users.users.pascal.passwordFile = config.age.secrets.password.path;
+  users.users.pascal.hashedPasswordFile = config.age.secrets.password.path;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

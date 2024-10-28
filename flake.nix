@@ -57,7 +57,6 @@
         };
         modules = with nixos-hardware.nixosModules; [
           common-pc
-          common-pc-hdd
           common-pc-ssd
           common-cpu-amd
           common-gpu-nvidia-nonprime

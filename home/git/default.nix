@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+let
+  email = "pascalengel@posteo.de";
+in
 {
   imports = [ ./common.nix ];
   programs.git = {
