@@ -136,7 +136,6 @@
       signal-desktop
       slack
       vlc
-      vscode
       zoom-us
       # Python
       (

@@ -18,6 +18,7 @@
     imports = [
       ./alacritty
       ./starship
+      ./vscode
       ./zsh
     ];
 

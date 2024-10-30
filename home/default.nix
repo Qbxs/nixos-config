@@ -18,7 +18,6 @@
 
     imports = [
       ./git
-      ./vscode
       ./mangohud
       ./scripts
     ];

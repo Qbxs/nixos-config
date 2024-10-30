@@ -78,10 +78,12 @@
     ripgrep
     fd
     nixfmt-rfc-style
+    nixd
     unzip
     unrar
     p7zip
     agenix.packages.${system}.default
+    vscode
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
