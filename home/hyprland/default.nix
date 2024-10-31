@@ -23,10 +23,10 @@ in
           "$mod, R, exec, $menu"
           "$mod, J, togglesplit"
           ", Print, exec, grimblast copy area"
-          "$mainMod, left, movefocus, h"
-          "$mainMod, right, movefocus, l"
-          "$mainMod, up, movefocus, k"
-          "$mainMod, down, movefocus, j"
+          "$mod, left, movefocus, h"
+          "$mod, right, movefocus, l"
+          "$mod, up, movefocus, k"
+          "$mod, down, movefocus, j"
         ]
         ++ (
           builtins.concatLists (builtins.genList
@@ -50,8 +50,8 @@ in
 
         border_size = 2;
 
-        col.active_border = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        col.inactive_border = "rgba(595959aa)";
+        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        "col.inactive_border" = "rgba(595959aa)";
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false;
@@ -72,7 +72,7 @@ in
         drop_shadow = true;
         shadow_range = 4;
         shadow_render_power = 3;
-        col.shadow = "rgba(1a1a1aee)";
+        "col.shadow" = "rgba(1a1a1aee)";
 
         blur = {
           enabled = true;
