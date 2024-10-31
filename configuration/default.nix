@@ -1,10 +1,10 @@
-{
-  config,
-  nixpkgs,
-  pkgs,
-  pkgs-newest,
-  pkgs-unstable,
-  ...
+{ config
+, nixpkgs
+, pkgs
+, pkgs-newest
+, pkgs-unstable
+, hyprland
+, ...
 }:
 
 {
@@ -13,6 +13,15 @@
     ./hardware-configuration.nix
     ../home/default.nix
   ];
+
+  nix = {
+    registry.nixpkgs.flake = nixpkgs;
+    nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
+    settings = {
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    };
+  };
 
   # Bootloader.
   boot.loader = {
@@ -35,12 +44,16 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-  # programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    # set the flake package
+    package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    xwayland.enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -100,7 +113,7 @@
     XDG_CONFIG_HOME = "\${HOME}/.config";
     XDG_BIN_HOME = "\${HOME}/.local/bin";
     XDG_DATA_HOME = "\${HOME}/.local/share";
-    TERMINAL = "alacritty";
+    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
     VISUAL = "vim";
     # note: this doesn't replace PATH, it just adds this to it
     PATH = [
@@ -152,12 +165,12 @@
       )
     ]
     ++
-      # Haskell
-      (with haskellPackages; [
-        haskell-language-server
-        hlint
-        ormolu
-      ]);
+    # Haskell
+    (with haskellPackages; [
+      haskell-language-server
+      hlint
+      ormolu
+    ]);
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 8080 ];
