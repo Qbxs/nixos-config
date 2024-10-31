@@ -13,6 +13,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     agenix.url = "github:ryantm/agenix";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs =
@@ -25,6 +26,7 @@
       nixos-hardware,
       nixos-wsl,
       agenix,
+      hyprland,
     }:
     let
       system = "x86_64-linux";
@@ -52,6 +54,7 @@
             pkgs-newest
             pkgs-unstable
             agenix
+            hyprland
             ;
           defaultShell = "zsh";
         };
@@ -80,10 +83,7 @@
                 home.sessionVariables.NIX_PATH = "nixpkgs=${config.xdg.configHome}/nix/inputs/nixpkgs\${NIX_PATH:+:$NIX_PATH}";
                 nix.registry.nixpkgs.flake = nixpkgs;
               };
-            nix = {
-              registry.nixpkgs.flake = nixpkgs;
-              nixPath = [ "nixpkgs=${nixpkgs.outPath}" ];
-            };
+            
           }
         ];
       };

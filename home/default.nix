@@ -1,15 +1,16 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  pkgs-unstable,
-  home-manager,
-  ...
+{ inputs
+, lib
+, config
+, pkgs
+, pkgs-unstable
+, home-manager
+, ...
 }:
 
 {
-  imports = [ ./common.nix ];
+  imports = [
+    ./common.nix
+  ];
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
@@ -17,6 +18,7 @@
   home-manager.users.pascal = {
 
     imports = [
+      ./hyprland
       ./git
       ./mangohud
       ./scripts
