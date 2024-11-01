@@ -9,6 +9,7 @@
         padding.x = 5;
         padding.y = 5;
       };
+      font.normal.family = "FiraMono Nerd Font";
       colors = {
         draw_bold_text_with_bright_colors = true;
         primary = {

@@ -55,7 +55,9 @@
     portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
-
+  
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts =  [ "FiraMono" ]; })];
 
   programs.steam = {
     enable = true;
