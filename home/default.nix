@@ -27,9 +27,6 @@
     home.packages = with pkgs; [
       # Launchers & Tools
       gamemode
-      pkgs-unstable.protontricks
-      steam
-      steam-run
       lutris
       wine
       dxvk
@@ -43,6 +40,7 @@
       mangohud
       vkBasalt
     ];
+ 
 
     systemd.user.services.mpris-proxy = {
       Unit.Description = "Mpris proxy";

@@ -46,6 +46,7 @@
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  programs.xwayland.enable = true;
   programs.hyprland = {
     enable = true;
     # set the flake package
@@ -54,6 +55,12 @@
     portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
+
+
+  programs.steam = {
+    enable = true;
+    # protontricks.enable = true;
+  }; 
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -73,6 +80,7 @@
     "nvidia_drm"
   ];
 
+  hardware.nvidia.modesetting.enable = true;
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
@@ -96,6 +104,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable =  true;
   };
 
   # user password
