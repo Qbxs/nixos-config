@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   wallpaper = "~/Pictures/_DSC1868.jpeg";
@@ -6,21 +6,22 @@ in
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    xwayland.enable = true;
     settings = {
       "$mod" = "SUPER";
       "$terminal" = "${pkgs.alacritty}/bin/alacritty";
       "$fileManager" = "${pkgs.dolphin}/bin/dolphin";
-      "$menu" = "${pkgs.wofi}/bin/wofi --show drun";
+      "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons";
       exec-once = "${pkgs.waybar}/bin/waybar && ${pkgs.hyprpaper}/bin/hyprpaper";
       bind =
         [
           "$mod, F, exec, ${pkgs.firefox}/bin/firefox"
           "$mod, T, exec, $terminal"
           "$mod, C, killactive"
-          "$mod, M, exit"
+          "$mod, L, exit"
           "$mod, E, exec, $fileManager"
           "$mod, V, togglefloating"
-          "$mod, R, exec, $menu"
+          "$mod, space, exec, $menu"
           "$mod, J, togglesplit"
           ", Print, exec, grimblast copy area"
           "$mod, left, movefocus, h"
@@ -28,21 +29,22 @@ in
           "$mod, up, movefocus, k"
           "$mod, down, movefocus, j"
         ]
-        ++ (
-          builtins.concatLists (builtins.genList
-            (i:
-              let ws = i + 1;
-              in [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-              ])
-            9)
-        );
-      env =
-        [
-          "XCURSOR_SIZE,24"
-          "HYPRCURSOR_SIZE,24"
-        ];
+        ++ (builtins.concatLists (
+          builtins.genList (
+            i:
+            let
+              ws = i + 1;
+            in
+            [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+            ]
+          ) 9
+        ));
+      env = [
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
+      ];
 
       general = {
         gaps_in = 5;
@@ -54,7 +56,7 @@ in
         "col.inactive_border" = "rgba(595959aa)";
 
         # Set to true enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = false;
+        resize_on_border = true;
 
         # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on
         allow_tearing = false;
@@ -85,15 +87,14 @@ in
       animations = {
         enabled = true;
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        animation =
-          [
-            "windows, 1, 7, myBezier"
-            "windowsOut, 1, 7, default, popin 80%"
-            "border, 1, 10, default"
-            "borderangle, 1, 8, default"
-            "fade, 1, 7, default"
-            "workspaces, 1, 6, default"
-          ];
+        animation = [
+          "windows, 1, 7, myBezier"
+          "windowsOut, 1, 7, default, popin 80%"
+          "border, 1, 10, default"
+          "borderangle, 1, 8, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
+        ];
       };
 
       dwindle = {
@@ -158,6 +159,119 @@ in
       preload = [ wallpaper ];
       wallpaper = [ wallpaper ];
     };
+  };
+
+  programs.rofi = {
+    enable = true;
+    theme =
+      let
+        inherit (config.lib.formats.rasi) mkLiteral;
+        bg0 = mkLiteral "#212121F2";
+        bg1 = mkLiteral "#2A2A2A";
+        bg2 = mkLiteral "#3D3D3D80";
+        bg3 = mkLiteral "#F57C00F2";
+        fg0 = mkLiteral "#E6E6E6";
+        fg1 = mkLiteral "#FFFFFF";
+        fg2 = mkLiteral "#969696";
+        fg3 = mkLiteral "#3D3D3D";
+      in
+      {
+        "*" = {
+          font = "Roboto 12";
+
+          background-color = mkLiteral "transparent";
+          text-color = fg0;
+
+          margin = mkLiteral "0px";
+          padding = mkLiteral "0px";
+          spacing = mkLiteral "0px";
+        };
+
+        window = {
+          location = mkLiteral "north";
+          y-offset = mkLiteral "calc(50% - 176px)";
+          width = 480;
+          border-radius = mkLiteral "24px";
+
+          background-color = bg0;
+        };
+
+        mainbox = {
+          padding = mkLiteral "12px";
+        };
+
+        inputbar = {
+          background-color = bg1;
+          border-color = bg3;
+
+          border = mkLiteral "2px";
+          border-radius = mkLiteral "16px";
+
+          padding = mkLiteral "8px 16px";
+          spacing = mkLiteral "8px";
+          children = map mkLiteral [
+            "prompt"
+            "entry"
+          ];
+        };
+
+        prompt = {
+          text-color = fg2;
+        };
+
+        entry = {
+          placeholder = "Search";
+          placeholder-color = fg3;
+        };
+
+        message = {
+          margin = mkLiteral "12px 0 0";
+          border-radius = mkLiteral "16px";
+          border-color = bg2;
+          background-color = bg2;
+        };
+
+        textbox = {
+          padding = mkLiteral "8px 24px";
+        };
+
+        listview = {
+          background-color = mkLiteral "transparent";
+
+          margin = mkLiteral "12px 0 0";
+          lines = 8;
+          columns = 1;
+
+          fixed-height = false;
+        };
+
+        element = {
+          padding = mkLiteral "8px 16px";
+          spacing = mkLiteral "8px";
+          border-radius = mkLiteral "16px";
+        };
+
+        "element normal active" = {
+          text-color = bg3;
+        };
+
+        "element alternate active" = {
+          text-color = bg3;
+        };
+
+        "element selected normal, element selected active" = {
+          background-color = bg3;
+        };
+
+        element-icon = {
+          size = mkLiteral "1em";
+          vertical-align = mkLiteral "0.5";
+        };
+
+        element-text = {
+          text-color = mkLiteral "inherit";
+        };
+      };
   };
 
   home.pointerCursor = {
