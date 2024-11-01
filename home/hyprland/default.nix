@@ -7,6 +7,7 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
+    systemd.variables = ["--all"];
     settings = {
       "$mod" = "SUPER";
       "$terminal" = "${pkgs.alacritty}/bin/alacritty";
