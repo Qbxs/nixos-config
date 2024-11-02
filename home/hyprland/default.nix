@@ -33,7 +33,7 @@ in
           "$mod, V, togglefloating"
           "ALT, space, exec, $menu"
           "$mod, S, togglesplit"
-          "$mod, P, exec, ${pkgs.clipboard-jh}/bin/cb cp $(${pkgs.hyprpicker}/bin/hyprpicker -f rgb)"
+          "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.clipboard-jh}/bin/cb cp"
           ", Print, exec, grimblast copy area"
           "$mod, H, movefocus, l"
           "$mod, L, movefocus, r"
