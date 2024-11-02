@@ -1,34 +1,40 @@
 { pkgs, config, ... }:
 
 let
-  wallpaper = "~/Pictures/_DSC1868.jpeg";
+  wallpaper = "~/Pictures/wallpaper.png";
 in
 {
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    systemd.variables = ["--all"];
+    systemd.variables = [ "--all" ];
     settings = {
       "$mod" = "SUPER";
       "$terminal" = "${pkgs.alacritty}/bin/alacritty";
       "$fileManager" = "${pkgs.dolphin}/bin/dolphin";
       "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons";
-      exec-once = "${pkgs.waybar}/bin/waybar && ${pkgs.hyprpaper}/bin/hyprpaper";
+      "$playerctl" = "${pkgs.playerctl}/bin/playerctl";
+      "$wpctl" = "${pkgs.wireplumber}/bin/wpctl";
+      exec-once = "${pkgs.waybar}/bin/waybar & ${pkgs.hyprpaper}/bin/hyprpaper";
       bind =
         [
           "$mod, F, exec, ${pkgs.firefox}/bin/firefox"
           "$mod, T, exec, $terminal"
           "$mod, C, killactive"
-          "$mod, L, exit"
+          "$mod, L, exec, hyprlock"
+          "$mod, Q, exit"
           "$mod, E, exec, $fileManager"
           "$mod, V, togglefloating"
-          "$mod, space, exec, $menu"
-          "$mod, J, togglesplit"
+          "ALT, space, exec, $menu"
+          "$mod, S, togglesplit"
           ", Print, exec, grimblast copy area"
-          "$mod, left, movefocus, h"
-          "$mod, right, movefocus, l"
-          "$mod, up, movefocus, k"
-          "$mod, down, movefocus, j"
+          "$mod, H, movefocus, l"
+          "$mod, L, movefocus, r"
+          "$mod, K, movefocus, u"
+          "$mod, J, movefocus, d"
+          "$mod, Tab, workspace, m+1"
+          "$mod SHIFT, Tab, workspace, m-1"
         ]
         ++ (builtins.concatLists (
           builtins.genList (
@@ -42,6 +48,16 @@ in
             ]
           ) 9
         ));
+      bindel = [
+        " , XF86AudioRaiseVolume, exec, $wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        " , XF86AudioLowerVolume, exec, $wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ];
+      bindl = [
+        " , XF86AudioMute, exec, $wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        " , XF86AudioPlay, exec, $playerctl play-pause"
+        " , XF86AudioPrev, exec, $playerctl previous"
+        " , XF86AudioNext, exec, $playerctl next"
+      ];
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
