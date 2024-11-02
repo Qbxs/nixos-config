@@ -167,6 +167,7 @@ in
       thunderbird
       discord
       mumble
+      pavucontrol
       signal-desktop
       slack
       vlc
