@@ -61,8 +61,6 @@ in
     xwayland.enable = true;
   };
 
-  fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraMono" ]; }) ];
-
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
 
@@ -160,6 +158,7 @@ in
       rofi-wayland
       wireplumber
       dunst
+      playerctl
       # GUI Apps
       alacritty
       pkgs-newest.discord
