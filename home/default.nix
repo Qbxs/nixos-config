@@ -16,6 +16,7 @@
     imports = [
       catppuccin.homeManagerModules.catppuccin
       ./hyprland
+      ./waybar
       ./git
       ./mangohud
       ./scripts
@@ -49,8 +50,14 @@
       catppuccin.enable = true;
     };
 
-    programs.waybar.catppuccin.enable = true;
-    services.dunst.catppuccin.enable = true;
+    programs.waybar = {
+      enable = true;
+      catppuccin.enable = true;
+    };
+    services.dunst = {
+      enable = true;
+      catppuccin.enable = true;
+    };
 
     systemd.user.services.mpris-proxy = {
       Unit.Description = "Mpris proxy";
