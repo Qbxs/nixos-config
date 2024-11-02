@@ -17,6 +17,8 @@
       catppuccin.homeManagerModules.catppuccin
       ./hyprland
       ./waybar
+      ./rofi
+      ./gtk
       ./git
       ./mangohud
       ./scripts
@@ -50,10 +52,6 @@
       catppuccin.enable = true;
     };
 
-    programs.waybar = {
-      enable = true;
-      catppuccin.enable = true;
-    };
     services.dunst = {
       enable = true;
       catppuccin.enable = true;
