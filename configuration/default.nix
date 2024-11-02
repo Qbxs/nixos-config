@@ -2,11 +2,12 @@
 , nixpkgs
 , pkgs
 , pkgs-newest
-, pkgs-unstable
 , hyprland
 , ...
 }:
-
+let
+  pkgs-unstable = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports = [
     ./common.nix
@@ -44,25 +45,22 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-macchiato";
+    package = pkgs.kdePackages.sddm;
+  };
   programs.xwayland.enable = true;
   programs.hyprland = {
     enable = true;
-    # set the flake package
     package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    # make sure to also set the portal package, so that they are in sync
     portalPackage = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     xwayland.enable = true;
   };
-  
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts =  [ "FiraMono" ]; })];
 
-  programs.steam = {
-    enable = true;
-    # protontricks.enable = true;
-  }; 
+  fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraMono" ]; }) ];
+
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -86,7 +84,9 @@
   hardware.opengl = {
     enable = true;
     driSupport32Bit = true;
+    package = pkgs-unstable.mesa.drivers;
     extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+    package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
     setLdLibraryPath = true;
   };
 
@@ -106,7 +106,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable =  true;
+    jack.enable = true;
   };
 
   # user password
@@ -150,6 +150,15 @@
       nixpkgs-fmt
       ntfs3g
       gnome3.adwaita-icon-theme
+      gnome.nautilus
+      gnome.sushi
+      clipboard-jh
+      waybar
+      hyprlock
+      hyprpaper
+      rofi-wayland
+      wireplumber
+      dunst
       # GUI Apps
       alacritty
       pkgs-newest.discord
@@ -161,6 +170,13 @@
       slack
       vlc
       zoom-us
+      (catppuccin-sddm.override {
+        flavor = "macchiato";
+        font = "Noto Sans";
+        fontSize = "9";
+        # background = "${~/Pictures/wallpaper.png}";
+        loginBackground = true;
+      })
       # Python
       (
         let

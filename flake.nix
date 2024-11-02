@@ -17,16 +17,16 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      nixpkgs-newest,
-      nixpkgs-unstable,
-      home-manager,
-      nixos-hardware,
-      nixos-wsl,
-      agenix,
-      hyprland,
+    { self
+    , nixpkgs
+    , nixpkgs-newest
+    , nixpkgs-unstable
+    , home-manager
+    , nixos-hardware
+    , nixos-wsl
+    , agenix
+    , hyprland
+    ,
     }:
     let
       system = "x86_64-linux";
@@ -42,7 +42,6 @@
         inherit system;
         config.allowUnfree = true;
       };
-      lib = nixpkgs.lib;
     in
     {
       nixosConfigurations.pascal-nixos = nixpkgs.lib.nixosSystem {
@@ -58,18 +57,19 @@
             ;
           defaultShell = "zsh";
         };
-        modules = with nixos-hardware.nixosModules; [
+        modules = (with nixos-hardware.nixosModules; [
           common-pc
           common-pc-ssd
           common-cpu-amd
           common-gpu-nvidia-nonprime
+        ]) ++ [
           ./configuration/default.nix
           nixpkgs.nixosModules.notDetected
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager.users.pascal =
-              { pkgs, config, ... }:
+              { config, ... }:
               {
                 # imports = [ nix-doom-emacs.hmModule ];
                 # programs.doom-emacs = {
@@ -83,7 +83,7 @@
                 home.sessionVariables.NIX_PATH = "nixpkgs=${config.xdg.configHome}/nix/inputs/nixpkgs\${NIX_PATH:+:$NIX_PATH}";
                 nix.registry.nixpkgs.flake = nixpkgs;
               };
-            
+
           }
         ];
       };
