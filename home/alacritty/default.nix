@@ -4,15 +4,17 @@
   programs.alacritty = {
     enable = true;
     catppuccin.enable = true;
-    # settings = {
-    #   window = {
-    #     opacity = 0.85;
-    #     padding.x = 5;
-    #     padding.y = 5;
-    #   };
-    #   font.normal.family = "FiraMono Nerd Font";
-    #   colors = {
-    #     draw_bold_text_with_bright_colors = true;
+    settings = {
+      window = {
+        opacity = 0.9;
+        padding.x = 4;
+        padding.y = 4;
+      };
+      font.normal.family = "FiraMono Nerd Font";
+      colors = {
+        draw_bold_text_with_bright_colors = true;
+      };
+    };
     #     primary = {
     #       background = "#11121D";
     #       foreground = "#a9b1d6";

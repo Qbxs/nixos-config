@@ -20,9 +20,7 @@ in
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.hyprpaper}/bin/hyprpaper"
-        "${pkgs.clipboard-jh}/bin/cb"
         "${pkgs.dunst}/bin/dunst"
-        "systemctl --user start hyprpolkitagent"
       ];
       bind =
         [
@@ -35,6 +33,7 @@ in
           "$mod, V, togglefloating"
           "ALT, space, exec, $menu"
           "$mod, S, togglesplit"
+          "$mod, P, exec, ${pkgs.clipboard-jh}/bin/cb cp $(${pkgs.hyprpicker}/bin/hyprpicker -f rgb)"
           ", Print, exec, grimblast copy area"
           "$mod, H, movefocus, l"
           "$mod, L, movefocus, r"
