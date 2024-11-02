@@ -6,24 +6,30 @@ in
 {
   home.sessionVariables.NIXOS_OZONE_WL = "1";
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = true; # TODO use package from flake
     xwayland.enable = true;
     systemd.variables = [ "--all" ];
     settings = {
       "$mod" = "SUPER";
       "$terminal" = "${pkgs.alacritty}/bin/alacritty";
-      "$fileManager" = "${pkgs.dolphin}/bin/dolphin";
+      "$fileManager" = "${pkgs.gnome.nautilus}/bin/nautilus";
       "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons";
       "$playerctl" = "${pkgs.playerctl}/bin/playerctl";
       "$wpctl" = "${pkgs.wireplumber}/bin/wpctl";
-      exec-once = "${pkgs.waybar}/bin/waybar & ${pkgs.hyprpaper}/bin/hyprpaper";
+      exec-once = [
+        "${pkgs.waybar}/bin/waybar"
+        "${pkgs.hyprpaper}/bin/hyprpaper"
+        "${pkgs.clipboard-jh}/bin/cb"
+        "${pkgs.dunst}/bin/dunst"
+        "systemctl --user start hyprpolkitagent"
+      ];
       bind =
         [
           "$mod, F, exec, ${pkgs.firefox}/bin/firefox"
           "$mod, T, exec, $terminal"
           "$mod, C, killactive"
-          "$mod, L, exec, hyprlock"
-          "$mod, Q, exit"
+          "$mod, Q, exec, hyprlock"
+          "$mod, W, exit"
           "$mod, E, exec, $fileManager"
           "$mod, V, togglefloating"
           "ALT, space, exec, $menu"
@@ -37,16 +43,17 @@ in
           "$mod SHIFT, Tab, workspace, m-1"
         ]
         ++ (builtins.concatLists (
-          builtins.genList (
-            i:
-            let
-              ws = i + 1;
-            in
-            [
-              "$mod, code:1${toString i}, workspace, ${toString ws}"
-              "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
-            ]
-          ) 9
+          builtins.genList
+            (
+              i:
+              let
+                ws = i + 1;
+              in
+              [
+                "$mod, code:1${toString i}, workspace, ${toString ws}"
+                "$mod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+              ]
+            ) 9
         ));
       bindel = [
         " , XF86AudioRaiseVolume, exec, $wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
@@ -86,7 +93,7 @@ in
 
         # Change transparency of focused and unfocused windows
         active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        inactive_opacity = 0.9;
 
         drop_shadow = true;
         shadow_range = 4;
@@ -174,7 +181,7 @@ in
       splash_offset = 2.0;
 
       preload = [ wallpaper ];
-      wallpaper = [ wallpaper ];
+      wallpaper = [ " , ${wallpaper}" ];
     };
   };
 
