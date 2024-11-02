@@ -1,9 +1,6 @@
 {
   config,
-  nixpkgs,
   pkgs,
-  pkgs-newest,
-  pkgs-unstable,
   agenix,
   ...
 }:
