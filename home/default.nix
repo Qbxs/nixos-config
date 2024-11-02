@@ -1,4 +1,5 @@
 { pkgs
+, catppuccin
 , ...
 }:
 
@@ -13,6 +14,7 @@
   home-manager.users.pascal = {
 
     imports = [
+      catppuccin.homeManagerModules.catppuccin
       ./hyprland
       ./git
       ./mangohud
@@ -35,7 +37,20 @@
       mangohud
       vkBasalt
     ];
- 
+
+    catppuccin = {
+      enable  = true;
+      accent = "peach";
+      flavor = "mocha";
+    };
+
+    programs.freetube = {
+      enable = true;
+      catppuccin.enable = true;
+    };
+
+    programs.waybar.catppuccin.enable = true;
+    services.dunst.catppuccin.enable = true;
 
     systemd.user.services.mpris-proxy = {
       Unit.Description = "Mpris proxy";

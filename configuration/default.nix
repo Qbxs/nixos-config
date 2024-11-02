@@ -24,6 +24,8 @@ in
     };
   };
 
+  catppuccin.enable = true;
+
   # Bootloader.
   boot.loader = {
     systemd-boot.enable = false;
@@ -48,7 +50,7 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "catppuccin-macchiato";
+    theme = "catppuccin-mocha";
     package = pkgs.kdePackages.sddm;
   };
   programs.xwayland.enable = true;
@@ -60,7 +62,6 @@ in
   };
 
   fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraMono" ]; }) ];
-
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
@@ -171,7 +172,7 @@ in
       vlc
       zoom-us
       (catppuccin-sddm.override {
-        flavor = "macchiato";
+        flavor = "mocha";
         font = "Noto Sans";
         fontSize = "9";
         # background = "${~/Pictures/wallpaper.png}";

@@ -14,6 +14,7 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     agenix.url = "github:ryantm/agenix";
     hyprland.url = "github:hyprwm/Hyprland";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -26,6 +27,7 @@
     , nixos-wsl
     , agenix
     , hyprland
+    , catppuccin
     ,
     }:
     let
@@ -54,6 +56,7 @@
             pkgs-unstable
             agenix
             hyprland
+            catppuccin
             ;
           defaultShell = "zsh";
         };
@@ -67,6 +70,7 @@
           nixpkgs.nixosModules.notDetected
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
+          catppuccin.nixosModules.catppuccin
           {
             home-manager.users.pascal =
               { config, ... }:
