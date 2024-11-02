@@ -15,5 +15,6 @@
       vscodevim.vim
       mkhl.direnv
     ];
+    enableUpdateCheck = false;
   };
 }
