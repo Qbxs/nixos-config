@@ -13,9 +13,9 @@
         position = "top";
         modules-left = [ "custom/power" "custom/lock" ];
         modules-center = [ "hyprland/workspaces" ];
-        modules-right = [ "custom/music" "pulseaudio" "clock" "backlight" "battery" "tray" ];
+        modules-right = [ "custom/music" "pulseaudio" "custom/clock" "backlight" "battery" "tray" ];
         "hyprland/workspaces" = {
-          format = "{icon}";
+          format = "";
           on-scroll-up = "hyprctl dispatch workspace e+1";
           on-scroll-down = "hyprctl dispatch workspace e-1";
         };
@@ -28,15 +28,15 @@
           escape = true;
           interval = 5;
           tooltip = false;
-          exec = "${pkgs.playerctl}/bin/playerctrl metadata --format='{{ title }}'";
+          exec = "${pkgs.playerctl}/bin/playerctrl metadata --format='{{ artist }} {{ title }}'";
           on-click = "${pkgs.playerctl}/bin/playerctrl play-pause";
           max-length = 50;
         };
-        clock = {
-          timezone = "Europe/Berlin";
-          tooltip-format = "<big>{=%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-          format-alt = " {=%d/%m/%Y}";
-          format = " {=%H=%M}";
+        "custom/clock" = {
+          exec = "${pkgs.coreutils}/bin/date +'%H:%M'";
+          on-hover = "${pkgs.coreutils}/bin/date +'%H:%M, %A, %d.%m.%Y'";
+          interval = 5;
+          format = "  {}";
         };
         battery = {
           states = {
@@ -66,7 +66,7 @@
         "custom/power" = {
           tooltip = false;
           on-click = "${pkgs.wlogout}/bin/wlogout &";
-          format = "襤";
+          format = "⏻";
         };
       };
     };
@@ -88,6 +88,7 @@
         margin: 5px;
         background-color: @surface0;
         margin-left: 1rem;
+        margin-right: 1rem;
       }
 
       #workspaces button {
@@ -110,7 +111,7 @@
       #custom-music,
       #tray,
       #backlight,
-      #clock,
+      #custom-clock,
       #battery,
       #pulseaudio,
       #custom-lock,
@@ -120,8 +121,8 @@
         margin: 5px 0;
       }
 
-      #clock {
-        color: @blue;
+      #custom-clock {
+        color: @lavander;
         border-radius: 0px 1rem 1rem 0px;
         margin-right: 1rem;
       }
