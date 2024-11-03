@@ -11,6 +11,7 @@ in
     catppuccin.enable = true;
     systemd.variables = [ "--all" ];
     settings = {
+      monitor = "DP-1, 3840x2160@60, 0x0, 1";
       "$mod" = "SUPER";
       "$terminal" = "${pkgs.alacritty}/bin/alacritty";
       "$fileManager" = "${pkgs.gnome.nautilus}/bin/nautilus";
