@@ -13,7 +13,7 @@
         position = "top";
         modules-left = [ "custom/power" "custom/lock" ];
         modules-center = [ "hyprland/workspaces" ];
-        modules-right = [ "custom/music" "pulseaudio" "custom/clock" "backlight" "battery" "tray" ];
+        modules-right = [ "custom/music" "wireplumber" "custom/clock" "backlight" "battery" "tray" ];
         "hyprland/workspaces" = {
           format = "";
           on-scroll-up = "hyprctl dispatch workspace e+1";
@@ -49,7 +49,7 @@
           format-alt = "{icon}";
           format-icons = [ "" "" "" "" "" "" "" "" "" "" "" "" ];
         };
-        pulseaudio = {
+        wireplumber = {
           scroll-step = 1;
           format = "{icon} {volume}%";
           format-muted = "";
@@ -57,6 +57,7 @@
             default = [ "" "" " " ];
           };
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+          on-click-middle = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         };
         "custom/lock" = {
           tooltip = false;
@@ -113,7 +114,7 @@
       #backlight,
       #custom-clock,
       #battery,
-      #pulseaudio,
+      #wireplumber,
       #custom-lock,
       #custom-power {
         background-color: @surface0;
@@ -147,7 +148,7 @@
           border-radius: 0;
       }
 
-      #pulseaudio {
+      #wireplumber {
         color: @maroon;
         border-radius: 1rem 0px 0px 1rem;
         margin-left: 1rem;
