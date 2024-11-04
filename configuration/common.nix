@@ -34,7 +34,7 @@
   };
   services.pcscd.enable = true;
 
-  fonts.packages = with pkgs; [ font-awesome (nerdfonts.override { fonts = [ "FiraMono" ]; }) ];
+  fonts.packages = with pkgs; [ font-awesome (nerdfonts.override { fonts = [ "FiraMono" "FantasqueSansMono" ]; }) ];
 
   # zsh
   programs.zsh.enable = true;
