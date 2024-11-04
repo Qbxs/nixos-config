@@ -15,7 +15,7 @@
         modules-center = [ "hyprland/workspaces" ];
         modules-right = [ "custom/music" "wireplumber" "custom/clock" "backlight" "battery" "tray" ];
         "hyprland/workspaces" = {
-          format = "";
+          format = " ";
           on-scroll-up = "hyprctl dispatch workspace e+1";
           on-scroll-down = "hyprctl dispatch workspace e-1";
         };
@@ -28,9 +28,9 @@
           escape = true;
           interval = 5;
           tooltip = false;
-          exec = "${pkgs.playerctl}/bin/playerctrl metadata --format='{{ artist }} {{ title }}'";
-          on-click = "${pkgs.playerctl}/bin/playerctrl play-pause";
-          max-length = 50;
+          exec = "${pkgs.playerctl}/bin/playerctl metadata --format='{{ artist }} {{ title }}'";
+          on-click = "${pkgs.playerctl}/bin/playerctl play-pause";
+          max-length = 40;
         };
         "custom/clock" = {
           exec = "${pkgs.coreutils}/bin/date +'%H:%M'";
@@ -95,7 +95,6 @@
       #workspaces button {
         color: @lavender;
         border-radius: 1rem;
-        padding: 0.4rem;
       }
 
       #workspaces button.active {
@@ -123,7 +122,7 @@
       }
 
       #custom-clock {
-        color: @lavander;
+        color: @lavender;
         border-radius: 0px 1rem 1rem 0px;
         margin-right: 1rem;
       }
