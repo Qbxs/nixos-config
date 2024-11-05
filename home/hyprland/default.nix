@@ -41,6 +41,10 @@ in
           "$mod, L, movefocus, r"
           "$mod, K, movefocus, u"
           "$mod, J, movefocus, d"
+          "$mod SHIFT, H, movewindow, l"
+          "$mod SHIFT, L, movewindow, r"
+          "$mod SHIFT, K, movewindow, u"
+          "$mod SHIFT, J, movewindow, d"
           "$mod, Tab, workspace, m+1"
           "$mod SHIFT, Tab, workspace, m-1"
         ]
@@ -66,6 +70,10 @@ in
         " , XF86AudioPlay, exec, $playerctl play-pause"
         " , XF86AudioPrev, exec, $playerctl previous"
         " , XF86AudioNext, exec, $playerctl next"
+      ];
+      bindm = [
+        "$mod SHIFT, mouse:272, movewindow"
+        "$mod SHIFT, mouse:273, resizewindow"
       ];
       env = [
         "XCURSOR_SIZE,24"
@@ -192,7 +200,7 @@ in
     enable = true;
     settings = {
       general = {
-        lock_cmd = ''notify-send "lock!"'';
+        lock_cmd = "hyprlock";
         unlock_cmd = ''notify-send "unlock!"'';
         before_sleep_cmd = ''notify-send "Zzz"'';
         after_sleep_cmd = ''notify-send "Awake!"'';
