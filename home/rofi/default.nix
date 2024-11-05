@@ -7,14 +7,14 @@
     theme =
       let
         inherit (config.lib.formats.rasi) mkLiteral;
-        bg0 = mkLiteral "#212121F2";
-        bg1 = mkLiteral "#2A2A2A";
-        bg2 = mkLiteral "#3D3D3D80";
-        bg3 = mkLiteral "#F57C00F2";
-        fg0 = mkLiteral "#E6E6E6";
-        fg1 = mkLiteral "#FFFFFF";
-        fg2 = mkLiteral "#969696";
-        fg3 = mkLiteral "#3D3D3D";
+        bg0 = mkLiteral "#313244";
+        bg1 = mkLiteral "#45475a";
+        bg2 = mkLiteral "#585b70";
+        bg3 = mkLiteral "#fab387";
+        fg0 = mkLiteral "#b4befe";
+        fg1 = mkLiteral "#000000";
+        fg2 = mkLiteral "#a6adc8";
+        fg3 = mkLiteral "#bac2de";
       in
       {
         "configuration" = {
@@ -101,12 +101,16 @@
           border-radius = mkLiteral "16px";
         };
 
+        "element selected active" = {
+          text-color = fg1;
+        };
+
         "element normal active" = {
-          text-color = bg3;
+          text-color = fg1;
         };
 
         "element alternate active" = {
-          text-color = bg3;
+          text-color = fg1;
         };
 
         "element selected normal, element selected active" = {

@@ -94,18 +94,18 @@
       }
 
       #workspaces button {
-        color: @lavender;
+        color: @peach;
         border-radius: 1rem;
       }
 
       #workspaces button.active {
-        color: @red;
+        color: @peach;
         border-radius: 1rem;
         font-weight: bold;
       }
 
       #workspaces button:hover {
-        color: @red;
+        color: @peach;
         border-radius: 1rem;
       }
 
