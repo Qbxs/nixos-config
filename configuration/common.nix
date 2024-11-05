@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  agenix,
-  ...
+{ config
+, pkgs
+, agenix
+, ...
 }:
 
 {
@@ -27,63 +26,64 @@
     '';
   };
 
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+  programs = {
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+    zsh.enable = true;
   };
-  services.pcscd.enable = true;
 
   fonts.packages = with pkgs; [ font-awesome (nerdfonts.override { fonts = [ "FiraMono" "FantasqueSansMono" ]; }) ];
 
-  # zsh
-  programs.zsh.enable = true;
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.utf8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.utf8";
-    LC_IDENTIFICATION = "de_DE.utf8";
-    LC_MEASUREMENT = "de_DE.utf8";
-    LC_MONETARY = "de_DE.utf8";
-    LC_NAME = "de_DE.utf8";
-    LC_NUMERIC = "de_DE.utf8";
-    LC_PAPER = "de_DE.utf8";
-    LC_TELEPHONE = "de_DE.utf8";
-    LC_TIME = "de_DE.utf8";
+  services = {
+    openssh.enable = true;
+    pcscd.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
-    # clis
-    zsh-nix-shell
-    vim
-    wget
-    gnumake
-    gnupg
-    pinentry
-    git
-    ripgrep
-    fd
-    nixfmt-rfc-style
-    nixd
-    unzip
-    unrar
-    p7zip
-    agenix.packages.${system}.default
-    vscode
-  ];
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "Europe/Berlin";
+
+  i18n = {
+    defaultLocale = "en_US.utf8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "de_DE.utf8";
+      LC_IDENTIFICATION = "de_DE.utf8";
+      LC_MEASUREMENT = "de_DE.utf8";
+      LC_MONETARY = "de_DE.utf8";
+      LC_NAME = "de_DE.utf8";
+      LC_NUMERIC = "de_DE.utf8";
+      LC_PAPER = "de_DE.utf8";
+      LC_TELEPHONE = "de_DE.utf8";
+      LC_TIME = "de_DE.utf8";
+    };
+  };
+
+  environment = {
+    systemPackages = with pkgs; [
+      # clis
+      zsh-nix-shell
+      vim
+      wget
+      gnumake
+      gnupg
+      pinentry
+      git
+      ripgrep
+      fd
+      nixfmt-rfc-style
+      nixd
+      unzip
+      unrar
+      p7zip
+      agenix.packages.${system}.default
+      vscode
+    ];
+    variables = {
+      EDITOR = "vim";
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.pascal = {
@@ -98,8 +98,6 @@
     shell = pkgs.zsh;
   };
 
-  environment.variables = {
-    EDITOR = "vim";
-  };
+
 
 }

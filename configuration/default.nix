@@ -12,7 +12,6 @@ in
   imports = [
     ./common.nix
     ./hardware-configuration.nix
-    ../home/default.nix
   ];
 
   nix = {
