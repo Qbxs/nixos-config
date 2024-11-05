@@ -2,6 +2,15 @@
 
 let
   wallpaper = "~/Pictures/wallpaper.png";
+  toggleWaybar = pkgs.writeShellScriptBin "toggleWaybar" ''
+    if
+      ${pkgs.systemd}/bin/systemctl --user status waybar.service;
+    then
+      ${pkgs.systemd}/bin/systemctl --user stop waybar.service
+    else
+      ${pkgs.systemd}/bin/systemctl --user start waybar.service
+    fi
+  '';
 in
 {
   home.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -19,7 +28,6 @@ in
       "$playerctl" = "${pkgs.playerctl}/bin/playerctl";
       "$wpctl" = "${pkgs.wireplumber}/bin/wpctl";
       exec-once = [
-        "${pkgs.waybar}/bin/waybar"
         "${pkgs.hyprpaper}/bin/hyprpaper"
         "${pkgs.hypridle}/bin/hypridle"
         "${pkgs.dunst}/bin/dunst"
@@ -36,6 +44,7 @@ in
           "ALT, space, exec, $menu"
           "$mod, S, togglesplit"
           "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.clipboard-jh}/bin/cb cp"
+          "$mod, B, exec, ${toggleWaybar}/bin/toggleWaybar"
           ", Print, exec, grimblast copy area"
           "$mod, H, movefocus, l"
           "$mod, L, movefocus, r"
