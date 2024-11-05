@@ -7,6 +7,10 @@ in
   programs.git = {
     enable = true;
     userName = real-name;
+    signing = {
+      gpgPath = "${pkgs.gnupg}/bin/gpg";
+      signByDefault = true;
+    };
     extraConfig = {
       color.ui = "auto";
       commit.gpgsign = true;
