@@ -94,7 +94,7 @@
       }
 
       #workspaces button {
-        color: @peach;
+        color: @lavender;
         border-radius: 1rem;
       }
 
