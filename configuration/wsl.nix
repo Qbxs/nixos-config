@@ -1,16 +1,8 @@
-{
-  config,
-  nixpkgs,
-  pkgs,
-  pkgs-newest,
-  pkgs-unstable,
-  ...
-}:
+{ pkgs, ... }:
 
 {
   imports = [
     ./common.nix
-    ../home/wsl.nix
   ];
 
   wsl.enable = true;

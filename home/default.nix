@@ -8,9 +8,6 @@
     ./common.nix
   ];
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-
   home-manager.users.pascal = {
 
     imports = [
@@ -42,19 +39,9 @@
     ];
 
     catppuccin = {
-      enable  = true;
+      enable = true;
       accent = "peach";
       flavor = "mocha";
-    };
-
-    programs.freetube = {
-      enable = true;
-      catppuccin.enable = true;
-    };
-
-    services.dunst = {
-      enable = true;
-      catppuccin.enable = true;
     };
 
     systemd.user.services.mpris-proxy = {
@@ -67,13 +54,26 @@
       Install.WantedBy = [ "default.target" ];
     };
 
-    # Enable emacs server
-    services.emacs.enable = true;
-
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
+    services = {
+      emacs.enable = true;
+      blueman-applet.enable = true;
+      dunst = {
+        enable = true;
+        catppuccin.enable = true;
+      };
     };
+
+    programs = {
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+      freetube = {
+        enable = true;
+        catppuccin.enable = true;
+      };
+    };
+
   };
 
 }

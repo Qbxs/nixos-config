@@ -67,6 +67,7 @@
           common-gpu-nvidia-nonprime
         ]) ++ [
           ./configuration/default.nix
+          ./home/default.nix
           nixpkgs.nixosModules.notDetected
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
@@ -106,6 +107,7 @@
         modules = [
           nixos-wsl.nixosModules.default
           ./configuration/wsl.nix
+          ./home/wsl.nix
           nixpkgs.nixosModules.notDetected
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager

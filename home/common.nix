@@ -1,37 +1,35 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  pkgs-unstable,
-  home-manager,
-  ...
+{ pkgs
+, ...
 }:
 
 {
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.backupFileExtension = "bkup";
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "bkup";
 
-  home-manager.users.pascal = {
+    users.pascal = {
 
-    imports = [
-      ./alacritty
-      ./starship
-      ./vscode
-      ./zsh
-    ];
+      imports = [
+        ./alacritty
+        ./starship
+        ./vscode
+        ./zsh
+      ];
 
-    home.stateVersion = "22.05";
+      nixpkgs.config.allowUnfree = true;
 
-    nixpkgs.config.allowUnfree = true;
+      home = {
+        stateVersion = "22.05";
 
-    home.packages = with pkgs; [
-      # Terminal
-      starship
-      fastfetch
-    ];
+        packages = with pkgs; [
+          # Terminal
+          starship
+          fastfetch
+        ];
+      };
 
+    };
   };
 
 }
