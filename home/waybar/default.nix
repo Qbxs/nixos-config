@@ -3,6 +3,7 @@
 {
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     catppuccin = {
       enable = true;
       mode = "prependImport";
