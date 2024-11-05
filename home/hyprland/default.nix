@@ -21,6 +21,7 @@ in
       exec-once = [
         "${pkgs.waybar}/bin/waybar"
         "${pkgs.hyprpaper}/bin/hyprpaper"
+        "${pkgs.hypridle}/bin/hypridle"
         "${pkgs.dunst}/bin/dunst"
       ];
       bind =
@@ -184,6 +185,26 @@ in
 
       preload = [ wallpaper ];
       wallpaper = [ " , ${wallpaper}" ];
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        lock_cmd = ''notify-send "lock!"'';
+        unlock_cmd = ''notify-send "unlock!"'';
+        before_sleep_cmd = ''notify-send "Zzz"'';
+        after_sleep_cmd = ''notify-send "Awake!"'';
+        ignore_dbus_inhibit = false;
+        ignore_systemd_inhibit = false;
+      };
+
+      listener = {
+        timeout = 500;
+        on-timeout = ''notify-send "You are idle!"'';
+        on-resume = ''notify-send "Welcome back!"'';
+      };
     };
   };
 
