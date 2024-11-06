@@ -105,6 +105,11 @@
           text-color = fg1;
         };
 
+        "element-text selected" = {
+          text-color = fg1;
+          text-style = mkLiteral "bold";
+        };
+
         "element normal active" = {
           text-color = fg1;
         };
