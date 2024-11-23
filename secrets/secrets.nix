@@ -12,4 +12,7 @@ in
   "password.age".publicKeys = [
     nixos_key
   ];
+  "wgProton.age".publicKeys = [
+    nixos_key
+  ];
 }
