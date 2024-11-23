@@ -227,12 +227,12 @@ in
         }
         { # JP-FREE#25
           publicKey = "FUnwfgDQWcuTC3BacXUv9hZhkNWywecdsJz2c4FZJCI=";
-          allowedIPs = [ "0.0.0.0/0" ];
+          allowedIPs = [ ];
           endpoint = "91.207.174.2:51820";
         }
         { # US-FREE#79
           publicKey = "igHNlAQgaI70R0w0OdWC9XR11xagXRcib1V4tPuU4RQ=";
-          allowedIPs = [ "0.0.0.0/0" ];
+          allowedIPs = [ ];
           endpoint = " 149.22.84.139:51820";
         }
       ];
