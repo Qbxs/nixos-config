@@ -81,13 +81,13 @@ in
   ];
 
   hardware.nvidia.modesetting.enable = true;
-  hardware.opengl = {
+  hardware.nvidia.open = true;
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     package = pkgs-unstable.mesa.drivers;
     extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
     package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
-    setLdLibraryPath = true;
   };
 
   # Enable CUPS to print documents.
@@ -98,7 +98,6 @@ in
   services.blueman.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -149,9 +148,9 @@ in
       nordic
       nixpkgs-fmt
       ntfs3g
-      gnome3.adwaita-icon-theme
-      gnome.nautilus
-      gnome.sushi
+      adwaita-icon-theme
+      nautilus
+      sushi
       clipboard-jh
       waybar
       hyprlock

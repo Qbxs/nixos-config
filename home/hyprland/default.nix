@@ -23,7 +23,7 @@ in
       monitor = "DP-1, 3840x2160@60, 0x0, 1";
       "$mod" = "SUPER";
       "$terminal" = "${pkgs.alacritty}/bin/alacritty";
-      "$fileManager" = "${pkgs.gnome.nautilus}/bin/nautilus";
+      "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
       "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons";
       "$playerctl" = "${pkgs.playerctl}/bin/playerctl";
       "$wpctl" = "${pkgs.wireplumber}/bin/wpctl";

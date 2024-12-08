@@ -27,7 +27,7 @@
       lutris
       wine
       dxvk
-      gnome.zenity
+      zenity
 
       # Games
       prismlauncher
