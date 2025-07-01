@@ -1,4 +1,4 @@
-{ ... }:
+{ catppuccin, ... }:
 
 {
   imports = [ ./common.nix ];

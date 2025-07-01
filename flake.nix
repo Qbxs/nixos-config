@@ -101,6 +101,7 @@
             pkgs-newest
             pkgs-unstable
             agenix
+            catppuccin
             ;
           defaultShell = "zsh";
         };
@@ -111,6 +112,7 @@
           nixpkgs.nixosModules.notDetected
           agenix.nixosModules.default
           home-manager.nixosModules.home-manager
+          catppuccin.nixosModules.catppuccin
         ];
       };
     };

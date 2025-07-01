@@ -11,8 +11,8 @@
     users.pascal = {
 
       imports = [
-        ./alacritty
-        ./starship
+        # ./alacritty
+        # ./starship
         ./vscode
         ./zsh
       ];
