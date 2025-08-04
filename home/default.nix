@@ -11,7 +11,7 @@
   home-manager.users.pascal = {
 
     imports = [
-      catppuccin.homeManagerModules.catppuccin
+      catppuccin.homeModules.catppuccin
       ./hyprland
       ./waybar
       ./rofi
@@ -57,21 +57,17 @@
     services = {
       emacs.enable = true;
       blueman-applet.enable = true;
-      dunst = {
-        enable = true;
-        catppuccin.enable = true;
-      };
+      dunst.enable = true;
     };
 
+    catppuccin.dunst.enable = true;
+    catppuccin.freetube.enable = true;
     programs = {
       direnv = {
         enable = true;
         nix-direnv.enable = true;
       };
-      freetube = {
-        enable = true;
-        catppuccin.enable = true;
-      };
+      freetube.enable = true;
     };
 
   };

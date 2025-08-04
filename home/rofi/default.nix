@@ -1,9 +1,9 @@
 { config, ... }:
 
 {
+  catppuccin.rofi.enable = false;
   programs.rofi = {
     enable = true;
-    catppuccin.enable = false;
     theme =
       let
         inherit (config.lib.formats.rasi) mkLiteral;

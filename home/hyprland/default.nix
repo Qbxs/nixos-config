@@ -14,10 +14,10 @@ let
 in
 {
   home.sessionVariables.NIXOS_OZONE_WL = "1";
+  catppuccin.hyprland.enable = true;
   wayland.windowManager.hyprland = {
     enable = true; # TODO use package from flake
     xwayland.enable = true;
-    catppuccin.enable = true;
     systemd.variables = [ "--all" ];
     settings = {
       monitor = "DP-1, 3840x2160@60, 0x0, 1";
@@ -88,6 +88,13 @@ in
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
       ];
+      input = {
+        kb_layout = [
+          "us"
+          "de"
+        ];
+        kb_options = "grp:win_space_toggle";
+      };
 
       general = {
         gaps_in = 5;
@@ -151,9 +158,9 @@ in
     };
   };
 
+  catppuccin.hyprlock.enable = true;
   programs.hyprlock = {
     enable = true;
-    catppuccin.enable = true;
     settings = {
       general = {
         disable_loading_bar = true;

@@ -8,7 +8,7 @@ in
     enable = true;
     userName = real-name;
     signing = {
-      gpgPath = "${pkgs.gnupg}/bin/gpg";
+      signer = "${pkgs.gnupg}/bin/gpg";
       signByDefault = true;
     };
     extraConfig = {

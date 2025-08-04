@@ -1,13 +1,14 @@
 { pkgs, ... }:
 
 {
+
+  catppuccin.waybar = {
+    enable = true;
+    mode = "prependImport";
+  };
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    catppuccin = {
-      enable = true;
-      mode = "prependImport";
-    };
     settings = {
       mainBar = {
         layer = "top";

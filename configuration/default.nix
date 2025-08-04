@@ -51,7 +51,6 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    theme = "catppuccin-mocha";
     package = pkgs.kdePackages.sddm;
   };
   programs.xwayland.enable = true;
@@ -85,9 +84,9 @@ in
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    package = pkgs-unstable.mesa.drivers;
+    package = pkgs-unstable.mesa;
     extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-    package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
+    package32 = pkgs-unstable.pkgsi686Linux.mesa;
   };
 
   # Enable CUPS to print documents.
@@ -98,7 +97,7 @@ in
   services.blueman.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -173,13 +172,7 @@ in
       zoom-us
       zathura
       obs-studio
-      (catppuccin-sddm.override {
-        flavor = "mocha";
-        font = "Noto Sans";
-        fontSize = "9";
-        # background = "${~/Pictures/wallpaper.png}";
-        loginBackground = true;
-      })
+      catppuccin-sddm
       # Python
       (
         let

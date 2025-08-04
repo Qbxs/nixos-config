@@ -34,7 +34,7 @@
     zsh.enable = true;
   };
 
-  fonts.packages = with pkgs; [ font-awesome (nerdfonts.override { fonts = [ "FiraMono" "FantasqueSansMono" ]; }) ];
+  fonts.packages = with pkgs; with nerd-fonts; [ fantasque-sans-mono fira-mono ];
 
   services = {
     openssh.enable = true;
@@ -46,7 +46,8 @@
   time.timeZone = "Europe/Berlin";
 
   i18n = {
-    defaultLocale = "en_US.utf8";
+    defaultLocale = "en_US.UTF-8";
+    supportedLocales = [ "de_DE.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
     extraLocaleSettings = {
       LC_ADDRESS = "de_DE.utf8";
       LC_IDENTIFICATION = "de_DE.utf8";
