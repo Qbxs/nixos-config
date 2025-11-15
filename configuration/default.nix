@@ -64,31 +64,6 @@ in
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
 
-  # NVIDIA drivers
-  services.xserver.videoDrivers = [ "nvidia" ];
-  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-  boot.kernelParams = [
-    "nvidia_drm.fbdev=1"
-    "nvidia_drm.modeset=1"
-  ];
-
-  boot.initrd.kernelModules = [
-    "nvidia"
-    "nvidia_modeset"
-    "nvidia_uvm"
-    "nvidia_drm"
-  ];
-
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.open = true;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-    package = pkgs-unstable.mesa;
-    extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-    package32 = pkgs-unstable.pkgsi686Linux.mesa;
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -169,6 +144,7 @@ in
       signal-desktop
       slack
       vlc
+      vscode
       zoom-us
       zathura
       obs-studio

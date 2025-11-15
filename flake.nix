@@ -64,7 +64,7 @@
           common-pc
           common-pc-ssd
           common-cpu-amd
-          common-gpu-nvidia-nonprime
+          common-gpu-amd
         ]) ++ [
           ./configuration/default.nix
           ./home/default.nix

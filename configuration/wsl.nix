@@ -15,7 +15,10 @@
 
   age.identityPaths = [ "/home/pascal/.ssh/id_ed25519" ];
 
-  environment.systemPackages = with pkgs; [ docker docker-compose ];
+  environment.systemPackages = with pkgs; [
+    docker
+    docker-compose
+  ];
 
   virtualisation.docker = {
     enable = true;

@@ -26,7 +26,7 @@
       nix-shell = ''nix-shell --run zsh'';
       nixos-config = ''code ~/nixos-config/.'';
     };
-    initExtra = ''
+    initContent = ''
       # Display $1 in terminal title.
       function set-term-title() {
         emulate -L zsh

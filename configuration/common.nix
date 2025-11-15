@@ -79,7 +79,6 @@
       unrar
       p7zip
       agenix.packages.${system}.default
-      vscode
     ];
     variables = {
       EDITOR = "vim";

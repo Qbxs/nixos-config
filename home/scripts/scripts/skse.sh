@@ -2,7 +2,6 @@
 env \
   # ENABLE_VKBASALT=1 \
   PROTON_ENABLE_NVAPI=1 \
-  PROTON_HIDE_NVIDIA_GPU=0 \
   DXVK_CONFIG_FILE=~/Modding/dxvk.conf \
   STEAM_COMPAT_CLIENT_INSTALL_PATH=/usr/games/steam  \
   STEAM_COMPAT_DATA_PATH=~/.steam/steam/steamapps/compatdata/489830 \
