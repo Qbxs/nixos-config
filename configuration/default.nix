@@ -1,9 +1,10 @@
-{ config
-, nixpkgs
-, pkgs
-, pkgs-newest
-, hyprland
-, ...
+{
+  config,
+  nixpkgs,
+  pkgs,
+  pkgs-newest,
+  hyprland,
+  ...
 }:
 let
   pkgs-unstable = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
@@ -162,13 +163,12 @@ in
       )
     ]
     ++
-    # Haskell
-    (with haskellPackages; [
-      haskell-language-server
-      hlint
-      ormolu
-    ]);
-
+      # Haskell
+      (with haskellPackages; [
+        haskell-language-server
+        hlint
+        ormolu
+      ]);
 
   programs.steam.enable = true;
 
@@ -178,32 +178,57 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-
   age.secrets.wgProton.file = ../secrets/wgProton.age;
-  networking.wg-quick.interfaces = {
-    wgProton = {
+  networking.wg-quick.interfaces = (
+    let
       address = [ "10.2.0.2/32" ];
       dns = [ "10.2.0.1" ];
-      privateKeyFile = config.age.secrets.wgProton.path;
-      peers = [
-        { # NL-FREE#38
-          publicKey = "3H83oJvvo4pMX9Lisc1/wNPhnGXoTe6FTubLo8JknSs=";
-          allowedIPs = [ "0.0.0.0/0" ];
-          endpoint = "190.2.153.215:51820";
-        }
-        { # JP-FREE#25
-          publicKey = "FUnwfgDQWcuTC3BacXUv9hZhkNWywecdsJz2c4FZJCI=";
-          allowedIPs = [ ];
-          endpoint = "91.207.174.2:51820";
-        }
-        { # US-FREE#79
-          publicKey = "igHNlAQgaI70R0w0OdWC9XR11xagXRcib1V4tPuU4RQ=";
-          allowedIPs = [ ];
-          endpoint = " 149.22.84.139:51820";
-        }
-      ];
-    };
-  };
+    in
+    {
+      wgProtonNl = {
+        autostart = true;
+        address = address;
+        dns = dns;
+        privateKeyFile = config.age.secrets.wgProton.path;
+        peers = [
+          {
+            # NL-FREE#38
+            publicKey = "3H83oJvvo4pMX9Lisc1/wNPhnGXoTe6FTubLo8JknSs=";
+            allowedIPs = [ "0.0.0.0/0" ];
+            endpoint = "190.2.153.215:51820";
+          }
+        ];
+      };
+      wgProtonJp = {
+        autostart = false;
+        address = address;
+        dns = dns;
+        privateKeyFile = config.age.secrets.wgProton.path;
+        peers = [
+          {
+            # JP-FREE#25
+            publicKey = "FUnwfgDQWcuTC3BacXUv9hZhkNWywecdsJz2c4FZJCI=";
+            allowedIPs = [ "0.0.0.0/0" ];
+            endpoint = "91.207.174.2:51820";
+          }
+        ];
+      };
+      wgProtonUs = {
+        autostart = false;
+        address = address;
+        dns = dns;
+        privateKeyFile = config.age.secrets.wgProton.path;
+        peers = [
+          {
+            # US-FREE#79
+            publicKey = "igHNlAQgaI70R0w0OdWC9XR11xagXRcib1V4tPuU4RQ=";
+            allowedIPs = [ "0.0.0.0/0" ];
+            endpoint = " 149.22.84.139:51820";
+          }
+        ];
+      };
+    }
+  );
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
