@@ -14,7 +14,7 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     agenix.url = "github:ryantm/agenix";
     hyprland.url = "github:hyprwm/Hyprland";
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin.url = "github:catppuccin/nix/release-25.05";
   };
 
   outputs =
