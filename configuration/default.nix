@@ -47,7 +47,11 @@ in
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+    xkb.layout = "us,de";
+    xkbOptions = "grp:win_space_toggle";
+  };
 
   services.displayManager.sddm = {
     enable = true;
@@ -60,8 +64,10 @@ in
     xwayland.enable = true;
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

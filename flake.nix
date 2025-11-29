@@ -13,7 +13,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     agenix.url = "github:ryantm/agenix";
-    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.url = "github:hyprwm/Hyprland";
     catppuccin.url = "github:catppuccin/nix/release-25.05";
   };
 
@@ -26,7 +26,6 @@
     , nixos-hardware
     , nixos-wsl
     , agenix
-    , hyprland
     , catppuccin
     ,
     }:
@@ -55,7 +54,6 @@
             pkgs-newest
             pkgs-unstable
             agenix
-            hyprland
             catppuccin
             ;
           defaultShell = "zsh";

@@ -13,13 +13,30 @@
       mainBar = {
         layer = "top";
         position = "top";
-        modules-left = [ "custom/power" "custom/lock" ];
+        modules-left = [
+          "custom/power"
+          "custom/lock"
+        ];
         modules-center = [ "hyprland/workspaces" ];
-        modules-right = [ "custom/music" "wireplumber" "custom/clock" "backlight" "battery" "tray" ];
+        modules-right = [
+          "custom/music"
+          "wireplumber"
+          "hyprland/language"
+          "custom/clock"
+          "backlight"
+          "battery"
+          "tray"
+        ];
         "hyprland/workspaces" = {
           format = " ";
           on-scroll-up = "hyprctl dispatch workspace e+1";
           on-scroll-down = "hyprctl dispatch workspace e-1";
+        };
+        "hyprland/language" = {
+          format = "{}";
+          format-en = "US";
+          format-de = "DE";
+          on-click = "hyprctl switchxkblayout metadot---das-keyboard-das-keyboard-model-s next";
         };
         tray = {
           icon-size = 21;
@@ -29,7 +46,6 @@
           format = "  {}";
           escape = true;
           interval = 5;
-          tooltip = false;
           exec = "${pkgs.playerctl}/bin/playerctl metadata --format='{{ artist }} {{ title }}'";
           on-click = "${pkgs.playerctl}/bin/playerctl play-pause";
           max-length = 40;
@@ -49,14 +65,31 @@
           format-charging = "";
           format-plugged = "";
           format-alt = "{icon}";
-          format-icons = [ "" "" "" "" "" "" "" "" "" "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
         wireplumber = {
           scroll-step = 1;
           format = "{icon} {volume}%";
           format-muted = "";
           format-icons = {
-            default = [ "" "" " " ];
+            default = [
+              ""
+              ""
+              " "
+            ];
           };
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
           on-click-middle = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
@@ -117,7 +150,8 @@
       #battery,
       #wireplumber,
       #custom-lock,
-      #custom-power {
+      #custom-power,
+      #language {
         background-color: @surface0;
         padding: 0.5rem 1rem;
         margin: 5px 0;
