@@ -2,11 +2,11 @@
   description = "Flake for nixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     # for frequent updates, only update this input:
-    nixpkgs-newest.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-newest.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     # nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     # nix-doom-emacs.inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +14,7 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     agenix.url = "github:ryantm/agenix";
     # hyprland.url = "github:hyprwm/Hyprland";
-    catppuccin.url = "github:catppuccin/nix/release-25.05";
+    catppuccin.url = "github:catppuccin/nix/release-25.11";
   };
 
   outputs =

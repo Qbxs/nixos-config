@@ -24,7 +24,7 @@ in
       "$mod" = "SUPER";
       "$terminal" = "${pkgs.alacritty}/bin/alacritty";
       "$fileManager" = "${pkgs.nautilus}/bin/nautilus";
-      "$menu" = "${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons";
+      "$menu" = "${pkgs.rofi}/bin/rofi -show drun -show-icons";
       "$playerctl" = "${pkgs.playerctl}/bin/playerctl";
       "$wpctl" = "${pkgs.wireplumber}/bin/wpctl";
       exec-once = [

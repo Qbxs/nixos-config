@@ -11,11 +11,11 @@ in
       signer = "${pkgs.gnupg}/bin/gpg";
       signByDefault = true;
     };
-    extraConfig = {
+    settings = {
       color.ui = "auto";
       commit.gpgsign = true;
       pull.rebase = false;
-      tag.ForceSignAnnotated = true;
+      tag.ForceSignAnnotated = false;
     };
   };
 }

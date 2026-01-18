@@ -69,7 +69,6 @@
       wget
       gnumake
       gnupg
-      pinentry
       git
       ripgrep
       fd

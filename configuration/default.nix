@@ -49,8 +49,10 @@ in
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    xkb.layout = "us,de";
-    xkbOptions = "grp:win_space_toggle";
+    xkb = {
+      layout = "us,de";
+      options = "grp:win_space_toggle";
+    };
   };
 
   services.displayManager.sddm = {
@@ -134,7 +136,7 @@ in
       waybar
       hyprlock
       hyprpaper
-      rofi-wayland
+      rofi
       wireplumber
       dunst
       playerctl

@@ -35,7 +35,7 @@
 
       # Overlay & Post-Processing
       mangohud
-      vkBasalt
+      vkbasalt
     ];
 
     catppuccin = {
