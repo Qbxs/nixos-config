@@ -36,6 +36,8 @@
       # Overlay & Post-Processing
       mangohud
       vkbasalt
+
+      rose-pine-hyprcursor
     ];
 
     catppuccin = {

@@ -87,6 +87,7 @@ in
       env = [
         "XCURSOR_SIZE,24"
         "HYPRCURSOR_SIZE,24"
+        "HYPRCURSOR_THEME,rose-pine-hyprcursor"
       ];
       input = {
         kb_layout = "us, de";
