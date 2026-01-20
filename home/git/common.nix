@@ -14,7 +14,7 @@ in
     settings = {
       color.ui = "auto";
       commit.gpgsign = true;
-      pull.rebase = false;
+      pull.rebase = true;
       tag.ForceSignAnnotated = false;
     };
   };
