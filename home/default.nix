@@ -64,13 +64,7 @@
 
     catppuccin.dunst.enable = true;
     catppuccin.freetube.enable = true;
-    programs = {
-      direnv = {
-        enable = true;
-        nix-direnv.enable = true;
-      };
-      freetube.enable = true;
-    };
+    programs.freetube.enable = true;
 
   };
 

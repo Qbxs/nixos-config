@@ -10,7 +10,7 @@
 
   programs.nix-ld = {
     enable = true;
-    package = pkgs.nix-ld-rs;
+    package = pkgs.nix-ld;
   };
 
   age.identityPaths = [ "/home/pascal/.ssh/id_ed25519" ];
