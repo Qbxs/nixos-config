@@ -45,7 +45,7 @@ in
           "$mod, S, togglesplit"
           "$mod, P, exec, ${pkgs.hyprpicker}/bin/hyprpicker | ${pkgs.clipboard-jh}/bin/cb cp"
           "$mod, B, exec, ${toggleWaybar}/bin/toggleWaybar"
-          ", Print, exec, grimblast copy area"
+          ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
           "$mod, H, movefocus, l"
           "$mod, L, movefocus, r"
           "$mod, K, movefocus, u"
